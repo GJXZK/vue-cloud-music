@@ -48,9 +48,9 @@
                alt=""
                slot="reference"
                v-else
-               
+               @click="goToPersonal" 
                />
-               <!-- @click="goToPersonal"  -->
+               
         </div>
         <div class="userName"
              v-if="userInfo.nickname">
@@ -61,21 +61,21 @@
       </div>
     </div>
 
-    <!-- <Registered :isDialogShow="isRegisteredShow"
-                @closeRegistered="closeRegistered"></Registered> -->
+    <Registered :isDialogShow="isRegisteredShow"
+                @closeRegistered="closeRegistered"></Registered>
   </div>
 </template>
 
 <script>
 // import { handleMusicTime } from 'plugins/utils';
-// import Registered from 'components/registered/Registered.vue';
+import Registered from '@/components/registered/Registered.vue';
 import login from '@/components/login/login';
 import {request} from '@/API/request'
 // 节流定时器名称
 // let timer;
 export default {
-  // components: { Registered, Login },
-  components:{login},
+  components: { Registered, login },
+  // components:{login},
   name: 'HeaderBar',
   data() {
     return {
@@ -118,6 +118,9 @@ export default {
         }
       }
     },
+    closeRegistered(){
+      this.isRegisteredShow=false;
+    }
   },
   async created() {
     // this.getHotSearch();

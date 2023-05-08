@@ -1,17 +1,19 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
-export default new Vuex.Store({
-  state: {
-  },
-  getters: {
-  },
+const state = {
+  isLogin: false,
+};
+// s创建Store对象
+const store = new Vuex.Store({
+  state,
   mutations: {
+    updataLoginState(state, flag = false) {
+      state.isLogin = flag;
+    },
   },
-  actions: {
-  },
-  modules: {
-  }
-})
+});
+
+export default store;
