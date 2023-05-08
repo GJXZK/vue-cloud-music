@@ -48,8 +48,9 @@
                alt=""
                slot="reference"
                v-else
-               @click="goToPersonal" 
+               
                />
+               <!-- @click="goToPersonal"  -->
                
         </div>
         <div class="userName"

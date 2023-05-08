@@ -264,7 +264,6 @@ export default {
       this.isButtonLoading = false;
       this.isCountDownShow = false;
       this.countDown = 60;
-
       this.$emit("closeRegistered");
     },
   },
