@@ -35,7 +35,7 @@ export default {
 
         console.log(path);
         this.activeNum = index;
-        // this.$emit("clickBarItem", path);
+        this.$emit("clickBarItem", path);
     }
   }
 };

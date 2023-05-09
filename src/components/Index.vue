@@ -30,6 +30,11 @@
             <i class="iconfont icon-shipin"></i>
             <span slot="title">视频</span>
           </el-menu-item>
+          <!-- 收藏 -->
+          <el-menu-item index="/">
+            <i class="iconfont icon-more"></i>
+            <span slot="title">收藏</span>
+          </el-menu-item>
           <!-- 每日推荐 -->
           <el-menu-item index="/recommendmusic">
             <i class="iconfont icon-good"></i>
@@ -74,7 +79,7 @@ export default {
 }
 .el-aside {
   background-color: #ccc;
-  height: calc(100vh - 105px);
+  height: calc(100vh - 110px);
 }
 .el-main{
   padding: 0px;
