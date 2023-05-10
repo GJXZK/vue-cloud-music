@@ -20,9 +20,6 @@
 <script>
 export default {
     props: ["newSongs"],
-  created() {
-    console.log(this.newSongs);
-  }
 }
 </script>
 

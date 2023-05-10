@@ -1,10 +1,12 @@
 <template>
-    <!-- 歌单列表组件  -->
+  <!-- 歌单列表组件  -->
   <div class="listCard">
     <div class="listItem" v-for="(item,index) in musicLists" :key="index">
       <div class="itemBox">
         <div class="imgbox">
           <img :src="item.picUrl" alt />
+          <!-- 右上角播放量 -->
+          <span class="playCount">{{ changeNum(item.playCount)}}</span>
         </div>
         <div class="title">{{ item.name }}</div>
       </div>
@@ -13,10 +15,13 @@
 </template>
 
 <script>
+import { handleNum } from "@/plugins/utils";
 export default {
   props: ["musicLists"],
-  created() {
-    console.log(this.musicLists);
+  methods: {
+    changeNum(num) {
+      return handleNum(num);
+    }
   }
 };
 </script>
@@ -34,11 +39,19 @@ export default {
     .itemBox {
       width: 80%;
       .imgbox {
+        position: relative;
         width: 100%;
         border-radius: 20px;
         overflow: hidden;
         img {
           width: 100%;
+        }
+        .playCount{
+          position: absolute;
+          z-index: 100;
+          right: 10px;
+          top: 8px;
+          color: white;
         }
       }
     }

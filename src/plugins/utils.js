@@ -38,6 +38,7 @@ export function formatDate(date, fmt) {
       num = (num / 10000).toFixed(1);
       return num + '万';
     } else {
+      console.log(num);
       return num;
     }
   }
