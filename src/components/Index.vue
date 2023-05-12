@@ -79,7 +79,7 @@ export default {
 }
 .el-aside {
   background-color: #ccc;
-  height: calc(100vh - 110px);
+  height: calc(100vh - 120px);
 }
 .el-main{
   padding: 0px;
