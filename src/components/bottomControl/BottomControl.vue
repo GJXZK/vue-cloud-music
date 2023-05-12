@@ -1,35 +1,39 @@
 <template>
   <div class="bottomControl">
-    <audio src></audio>
+    <audio
+      :src="musicUrl"
+      autoplay
+      ref="audioPlayer"
+      @play="changeState(true)"
+      @pause="changeState(false)"
+      @ended="changeMusic('next')"
+      @timeupdate="tiemupdate"
+    ></audio>
     <!-- bottom左侧 歌曲图标 点击图标弹出播放界面 歌曲信息 -->
     <div class="left">
       <div class="musicpic">
-        <img :src="defaultImg" alt v-if="musicDetail.al" />
+        <img :src="musicDetail.al.picUrl" alt v-if="musicDetail.al" />
         <img src="../../assets/img/test.jpg" v-else alt />
       </div>
       <div class="musicInfo">
-        <div class="musicName">
-          <!-- {{ musicDetail.name }} -->
-          十年
-        </div>
-        <div class="singer">
-          陈奕迅
-          <!-- {{ musicDetail.ar[0].name }} -->
-        </div>
+        <div class="musicName" v-if="musicDetail && musicDetail.name">{{ musicDetail.name }}</div>
+        <div class="singer" v-if="musicDetail && musicDetail.ar">{{ musicDetail.ar[0].name }}</div>
       </div>
     </div>
     <!-- bottom中间 歌曲操作 上一首 下一首 暂停 进度条-->
     <div class="center">
       <!-- 歌曲操作 -->
       <div class="controls">
-        <span>
-          <i class="iconfont icon-xunhuan"></i>
+        <span @click="playType = playType=='order'?'random':'order'">
+          <i class="iconfont icon-xunhuan" v-show="playType == 'order'"></i>
+          <i class="iconfont icon-suiji" v-show="playType == 'random'"></i>
         </span>
         <span>
           <i class="iconfont icon-shangyishou"></i>
         </span>
-        <span>
-          <i class="iconfont icon-bofang"></i>
+        <span @click="musicList.length != 0 ? changePlayState() : ''">
+          <i class="iconfont icon-icon_play" v-if="!this.$store.state.playState"></i>
+          <i class="iconfont icon-zantingtingzhi" v-else></i>
         </span>
         <span>
           <i class="iconfont icon-xiayishou"></i>
@@ -41,10 +45,16 @@
       <!-- liners 进度条 -->
       <!-- 进度条 -->
       <div class="progressBar">
-        <span class="currentTime"></span>
+        <span class="currentTime">{{currentTime | handleMusicTime}}</span>
         <!-- :value 是单向的  要实现双向要v-model -->
-        <el-slider></el-slider>
-        <span class="totalTime"></span>
+        <el-slider
+          class="progressSlider"
+          v-model="timeProgress"
+          :show-tooltip="false"
+          :disabled="musicList.length == 0"
+        ></el-slider>
+        
+        <span class="totalTime">{{ duration }}</span>
       </div>
     </div>
     <!-- bottom右侧 播放列表  -->
@@ -58,7 +68,7 @@
       </div>
     </div>
     <!-- 抽屉 -->
-    <el-drawer :visible.sync="drawer" :with-header="false" width="300">
+    <el-drawer :visible.sync="drawer" :with-header="false" width="300" size="100%">
       <!-- <div class="drawerHeader">总{{ musicList.length }}首</div> -->
       <!-- <el-table
         :data="musicList"
@@ -72,18 +82,30 @@
         <el-table-column prop="name" width="150px"> </el-table-column>
         <el-table-column prop="ar[0].name" width="80px"> </el-table-column>
         <el-table-column prop="dt" width="70px"> </el-table-column>
-      </el-table> -->
+      </el-table>-->
     </el-drawer>
   </div>
 </template>
 
 <script>
+// import { handleMusicTime,returnSecond } from '@/plugins/utils';
+import { getMusicUrl, getMusicDetail } from "@/API/index";
+import { handleMusicTime, returnSecond } from "@/plugins/utils";
+let lastSecond = 0;
+let durationNum = 0;
+// let volumeSave = 0;
 export default {
   data() {
     return {
       musicDetail: {},
       volume: 300,
       drawer: false,
+      musicUrl: "",
+      playType: "order", // 播放模式 （顺序播放 随机播放 order random）
+      musicList: [1], // 播放列表
+      duration: "00:00", //音乐总时长
+      currentTime: 0, //当前播放时间
+      timeProgress: 0 //进度条的位置
     };
   },
   computed: {
@@ -91,7 +113,7 @@ export default {
       return "../../assets/img/test.jpg";
     }
   },
-  methods:{
+  methods: {
     // 点击打开抽屉的回调
     openDrawer() {
       // 关闭也是这个回调，所以直接取反
@@ -99,6 +121,57 @@ export default {
       this.hasDrawerOpend = true;
       this.handleDrawerListDOM(this.currentMusicIndex);
     },
+    // 获取歌曲的播放地址
+    async getMusicUrl(id) {
+      const res = await getMusicUrl(id);
+      this.musicUrl = res.data.data[0].url;
+      console.log(res);
+    },
+    // 获取歌曲详情
+    async getMusicDetail(id) {
+      const res = await getMusicDetail(id);
+      console.log(res.data.songs[0]);
+      this.musicDetail = res.data.songs[0];
+      this.duration = handleMusicTime(res.data.songs[0].dt);
+      durationNum = returnSecond(this.duration)
+    },
+    // 播放音乐的函数
+    playMusic() {
+      this.$refs.audioPlayer.play();
+    },
+    // 暂停音乐函数
+    pauseMusic() {
+      this.$refs.audioPlayer.pause();
+    },
+    // audio开始和暂停的回调 在vuex中修改状态
+    changeState(state) {
+      this.$store.commit("updataPlayState", state);
+    },
+    changePlayState() {
+      !this.$store.state.playState ? this.playMusic() : this.pauseMusic();
+    },
+    // 更新播放时间
+    tiemupdate(){
+      let time = this.$refs.audioPlayer.currentTime
+      console.log(time);
+      this.$store.commit("updateCurrentTime", time);
+      time = Math.floor(time);
+      if(time !== lastSecond ){
+        lastSecond = time;
+        this.currentTime = time;
+        this.timeProgress = Math.floor((time/durationNum)*100)
+      }
+    }
+  },
+  watch: {
+    "$store.state.musicId"(id) {
+      console.log("vuex中的Id发生了变化");
+      this.getMusicUrl(id);
+      this.getMusicDetail(id);
+    }
+  },
+  filters:{
+    handleMusicTime
   }
 };
 </script>
@@ -168,14 +241,38 @@ export default {
       height: 60px;
       line-height: 40px;
       i {
-        font-size: 24px;
+        font-size: 27px;
         color: #313131;
       }
       span {
         display: flex;
       }
       span:nth-child(3) {
+        width: 40px;
+        display: flex;
+        justify-content: center;
         font-size: 27px;
+      }
+      .icon-zantingtingzhi {
+        font-size: 40px;
+      }
+    }
+    .progressBar {
+      width: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .currentTime,
+      .totalTime {
+        font-size: 18px;
+        transform: scale(0.85);
+        color: #aaa;
+        margin: 0 5px;
+        width: 30px;
+        text-align: center;
+      }
+      .progressSlider {
+        width: 320px;
       }
     }
   }
@@ -204,6 +301,15 @@ export default {
         }
       }
     }
+  }
+  .el-drawer__wrapper {
+    height: calc(100vh - 70px);
+  }
+  .el-drawer__open {
+    height: calc(100vh - 70px);
+  }
+  .el-drawer {
+    height: calc(100vh - 70px);
   }
 }
 </style>

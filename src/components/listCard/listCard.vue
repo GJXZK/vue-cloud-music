@@ -43,6 +43,15 @@ export default {
         width: 100%;
         border-radius: 20px;
         overflow: hidden;
+        img::after{
+          content: '';
+          width: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          background: url('@/assets/img/imgLoading.png');
+          background-size: contain;
+        }
         img {
           width: 100%;
         }
