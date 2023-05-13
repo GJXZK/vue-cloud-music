@@ -39,7 +39,7 @@ export default {
 .discover{
   margin: auto;
   overflow: scroll;
-  height: calc(100vh - 180px);
+  height: calc(100vh - 200px);
   padding: 0 15px;
 }
 </style>

@@ -52,8 +52,9 @@
           v-model="timeProgress"
           :show-tooltip="false"
           :disabled="musicList.length == 0"
+          @change="dragSlider"
         ></el-slider>
-        
+
         <span class="totalTime">{{ duration }}</span>
       </div>
     </div>
@@ -133,7 +134,7 @@ export default {
       console.log(res.data.songs[0]);
       this.musicDetail = res.data.songs[0];
       this.duration = handleMusicTime(res.data.songs[0].dt);
-      durationNum = returnSecond(this.duration)
+      durationNum = returnSecond(this.duration);
     },
     // 播放音乐的函数
     playMusic() {
@@ -151,16 +152,19 @@ export default {
       !this.$store.state.playState ? this.playMusic() : this.pauseMusic();
     },
     // 更新播放时间
-    tiemupdate(){
-      let time = this.$refs.audioPlayer.currentTime
-      console.log(time);
+    tiemupdate() {
+      let time = this.$refs.audioPlayer.currentTime;
       this.$store.commit("updateCurrentTime", time);
       time = Math.floor(time);
-      if(time !== lastSecond ){
+      if (time !== lastSecond) {
         lastSecond = time;
         this.currentTime = time;
-        this.timeProgress = Math.floor((time/durationNum)*100)
+        this.timeProgress = Math.floor((time / durationNum) * 100);
       }
+    },
+    dragSlider(e) {
+      this.currentTime =Math.floor((e/100)*durationNum);
+      this.$refs.audioPlayer.currentTime=this.currentTime;
     }
   },
   watch: {
@@ -170,7 +174,7 @@ export default {
       this.getMusicDetail(id);
     }
   },
-  filters:{
+  filters: {
     handleMusicTime
   }
 };

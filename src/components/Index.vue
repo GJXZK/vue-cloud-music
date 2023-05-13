@@ -72,14 +72,14 @@ export default {
 <style>
 .el-header {
   background-color: #ec4141;
-  height: 50px !important;
+  height: 70px !important;
   padding: 0;
   margin: 0;
   z-index: 100;
 }
 .el-aside {
   background-color: #ccc;
-  height: calc(100vh - 120px);
+  height: calc(100vh - 140px);
 }
 .el-main{
   padding: 0px;
