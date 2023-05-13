@@ -22,7 +22,7 @@ const routes = [
   {
     path:'/index',
     component:Index,
-    redirect:'/search',
+    redirect:'/discover',
     children:[
       {
         path:'/discover',
@@ -56,6 +56,7 @@ const routes = [
         component:Recommendmusic
       },
       {
+        name:'search',
         path:'/search',
         component:Search,
         redirect:'/search/searchsong',

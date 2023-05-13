@@ -1,7 +1,7 @@
 <template>
   <div class="searchContainer">
     <NavBar :navBarData="navBarData" @clickBarItem="clickBarItem"></NavBar>
-    <router-view></router-view>
+    <router-view class="search"></router-view>
   </div>
 </template>
 
@@ -10,14 +10,17 @@ import NavBar from "@/components/navBar/NavBar.vue";
 export default {
   name: "mySearch",
   components: { NavBar },
+  created(){
+    console.log(this.$route.query.keyword);
+  },
   data() {
     return {
       navBarData: [
-        { name: "单曲", path: "/search/searchsong" },
-        { name: "歌手", path: "/search/searchsinger"},
-        { name: "歌单", path: "/search/searchmusiclist" },
-        { name: "视频", path: "/search/searchvideo" },
-        { name: "专辑", path: "/search/searchalbum" }
+        { name: "单曲", path: `/search/searchsong/${this.$route.query.keyword}` },
+        { name: "歌手", path: `/search/searchsinger/${this.$route.query.keyword}`},
+        { name: "歌单", path: `/search/searchmusiclist/${this.$route.query.keyword}`},
+        { name: "视频", path: `/search/searchvideo/${this.$route.query.keyword}` },
+        { name: "专辑", path: `/search/searchalbum/${this.$route.query.keyword}` }
       ]
     };
   },
@@ -29,5 +32,11 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.search{
+  margin: auto;
+  overflow: scroll;
+  height: calc(100vh - 200px);
+  padding: 0 15px;
+}
 </style>

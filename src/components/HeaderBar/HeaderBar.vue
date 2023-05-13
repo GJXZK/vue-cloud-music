@@ -20,6 +20,7 @@
           background="#ec4141"
           shape='round'
           @focus="SearchFocus"
+          @search="onSubmit"
         />
         <!-- 热搜bang -->
         <div class="hotSearch" v-if="!searchSuggestList">
@@ -94,8 +95,6 @@ export default {
       isSearchPopShow: false,
       // 热搜列表数据
       hotSearchList: [],
-      // 需要搜索的内容
-      searchInput: "",
       // 搜索建议列表
       searchSuggestList: {},
       // 是否显示注册框
@@ -135,6 +134,20 @@ export default {
     // 搜索框获取焦点
     SearchFocus(){
       
+    },
+    // 输入内容后 提交搜索
+    onSubmit(){
+      if(this.searchKeyWord !=''){
+        this.goSearch()
+      }
+    },
+    goSearch() {
+      this.$router.push({
+        name:'search',
+        query:{
+          keyword:this.searchKeyWord
+        }
+      })
     }
   },
   async created() {

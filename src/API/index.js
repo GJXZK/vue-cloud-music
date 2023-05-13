@@ -19,6 +19,10 @@ export function getMusicUrl(id){
 export function getMusicDetail(id){
     return request(`/song/detail?ids=${id}`)
 }
+// 最佳匹配
+export function getMultimatch(keyword){
+    return request(`/search/multimatch?keywords=${keyword}`)
+}
 // 搜索歌曲  /cloudsearch?keywords=海阔天空
 export function getSearch(keyword){
     return  request(`/cloudsearch?keywords=${keyword}`)
