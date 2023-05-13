@@ -9,6 +9,12 @@ const Ranking=()=>import('@/views/discover/discoverChildren/Ranking')
 const Singer=()=>import('@/views/discover/discoverChildren/Singer')
 const Video = () =>import('@/views/video/Video')
 const Recommendmusic = () =>import('@/views/recommendmusic/Recommendmusic')
+const Search = () =>import('@/views/search/Search')
+const SearchSong = () =>import('@/views/search/SearchChildren/SearchSong')
+const SearchMusicList = () =>import('@/views/search/SearchChildren/SearchMusicList')
+const SearchAlbum = () =>import('@/views/search/SearchChildren/SearchAlbum')
+const SearchVideo = () =>import('@/views/search/SearchChildren/SearchVideo')
+const SearchSinger = () =>import('@/views/search/SearchChildren/SearchSinger')
 Vue.use(VueRouter)
 // 默认路径打开Index
 const routes = [
@@ -16,7 +22,7 @@ const routes = [
   {
     path:'/index',
     component:Index,
-    redirect:'/discover',
+    redirect:'/search',
     children:[
       {
         path:'/discover',
@@ -48,6 +54,33 @@ const routes = [
       {
         path:'/recommendmusic',
         component:Recommendmusic
+      },
+      {
+        path:'/search',
+        component:Search,
+        redirect:'/search/searchsong',
+        children: [
+          {
+            path:'/search/searchvideo',
+            component:SearchVideo
+          },
+          {
+            path:'/search/searchalbum',
+            component:SearchAlbum
+          },
+          {
+            path:'/search/searchsong',
+            component:SearchSong
+          },
+          {
+            path:'/search/searchmusiclist',
+            component:SearchMusicList
+          },
+          {
+            path:'/search/searchsinger',
+            component:SearchSinger
+          }
+        ]
       }
     ]
   }

@@ -19,3 +19,7 @@ export function getMusicUrl(id){
 export function getMusicDetail(id){
     return request(`/song/detail?ids=${id}`)
 }
+// 搜索歌曲  /cloudsearch?keywords=海阔天空
+export function getSearch(keyword){
+    return  request(`/cloudsearch?keywords=${keyword}`)
+}
