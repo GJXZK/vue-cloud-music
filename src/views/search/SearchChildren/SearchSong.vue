@@ -21,14 +21,14 @@
     <!-- 歌曲列表 -->
     <el-table
       :data="searchSongList"
-      size="mini"
+      size="small"
       style="width: 100%"
       @row-dblclick="clickRow"
       @cell-click="clickCell"
       highlight-current-row
       stripe
     >
-      <el-table-column label width="30" type="index" :index="handleIndex"></el-table-column>
+      <el-table-column label width="30" type="index"></el-table-column>
       <el-table-column label width="23">
         <i class="iconfont icon-download"></i>
       </el-table-column>
@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import { handleMusicTime } from "@/plugins/utils";
 import { getMultimatch, getSearch } from "@/API";
 export default {
   data() {
@@ -52,26 +53,28 @@ export default {
     };
   },
   created() {
+    console.log("我是SearchSong");
     this.getMultimatch();
     this.getSearch();
-    
   },
   methods: {
     async getMultimatch() {
       const res = await getMultimatch(this.$route.params.keyword);
       this.multiMatch = res.data.result;
-      console.log(this.multiMatch);
     },
     async getSearch() {
       const res = await getSearch(this.$route.params.keyword);
-      console.log(res.data.result);
       this.searchSongList = res.data.result.songs;
       this.songCount = res.data.result.songCount;
+      this.searchSongList.forEach((item,index)=>{
+        this.searchSongList[index].dt = handleMusicTime(item.dt);
+      })
+      console.log(this.searchSongList);
     },
 
     // 处理索引
     handleIndex(index) {
-      // console.log(index);
+      console.log(index);
       index = index + 1 + 30 * (this.currentPage - 1);
       if (index < 10) {
         return "0" + index;
@@ -101,6 +104,12 @@ export default {
         musicList,
         musicListId: this.$store.state.musicListId
       });
+    }
+  },
+  watch: {
+    $route() {
+      this.getMultimatch();
+      this.getSearch();
     }
   }
 };

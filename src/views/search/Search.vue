@@ -10,11 +10,9 @@ import NavBar from "@/components/navBar/NavBar.vue";
 export default {
   name: "mySearch",
   components: { NavBar },
-  created(){
-    console.log(this.$route.params.keyword);
-  },
   data() {
     return {
+      // 死数据  在搜索一次后 在搜索无法转变为新搜索的内容 是路由参数无法转变 bug
       navBarData: [
         { name: "单曲", path: `/search/searchsong/${this.$route.params.keyword}` },
         { name: "歌手", path: `/search/searchsinger/${this.$route.params.keyword}`},
@@ -26,7 +24,9 @@ export default {
   },
   methods: {
     clickBarItem(path) {
-      this.$router.push(path);
+      if (path != this.$route.path) {
+        this.$router.push(path);
+      }
     }
   }
 };

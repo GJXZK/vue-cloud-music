@@ -8,13 +8,13 @@ const state = {
   isLogin: false,
   // 歌曲数据
   musicInfo: {},
-  musicUrl: "", //歌曲url
-  musicId: "", //歌曲Id
-  playState: false, //歌曲播放状态
-  // 由audio中获取 用于进度条和歌词滚动
-  currentTime: 0,  // 实时播放时长
+  musicUrl: "",      //歌曲url
+  musicId: "",       //歌曲Id
+  playState: false,  //歌曲播放状态
+  currentTime: 0,    // 实时播放时长// 由audio中获取 用于进度条和歌词滚动
   musicList: [],     //当前播放歌单
   musicListId: '',   // 当前播放歌单的id
+  searchKeyword:'',  //搜索关键字 解决搜索后无法在搜索的问题
 };
 // 创建Store对象
 const store = new Vuex.Store({
@@ -51,6 +51,9 @@ const store = new Vuex.Store({
       state.musicList = musicList;
       // console.log('updateMusicList'); F
     },
+    updataSearchKeyword(state,value){
+      state.searchKeyword=value
+    }
   },
 });
 

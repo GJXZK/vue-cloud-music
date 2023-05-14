@@ -45,17 +45,14 @@ export default {
     async getBannerList(){
       const res = await getBannerList()
       this.bannerList=res.data.banners
-      console.log(this.bannerList);
     },
     async getNewsong(){
         const res = await getNewsong()
         this.newSongs=res.data.result
-        console.log(this.newSongs);
     },
     async getMusicList(){
         const res = await getMusicList()
         this.musicLists=res.data.result
-        console.log(this.musicLists);
     }
   }
 };

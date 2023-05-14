@@ -126,12 +126,10 @@ export default {
     async getMusicUrl(id) {
       const res = await getMusicUrl(id);
       this.musicUrl = res.data.data[0].url;
-      console.log(res);
     },
     // 获取歌曲详情
     async getMusicDetail(id) {
       const res = await getMusicDetail(id);
-      console.log(res.data.songs[0]);
       this.musicDetail = res.data.songs[0];
       this.duration = handleMusicTime(res.data.songs[0].dt);
       durationNum = returnSecond(this.duration);

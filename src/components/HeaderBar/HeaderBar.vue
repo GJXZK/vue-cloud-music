@@ -138,11 +138,11 @@ export default {
     // 输入内容后 提交搜索
     onSubmit(){
       if(this.searchKeyWord !=''){
+        this.$store.commit('updataSearchKeyword', this.searchKeyWord)
         this.goSearch()
       }
     },
     goSearch() {
-      console.log(this.searchKeyWord)
       this.$router.push({
         name:'mysearch',
         params:{keyword:this.searchKeyWord},
