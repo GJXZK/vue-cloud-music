@@ -142,11 +142,13 @@ export default {
       }
     },
     goSearch() {
+      console.log(this.searchKeyWord)
       this.$router.push({
-        name:'search',
-        query:{
-          keyword:this.searchKeyWord
-        }
+        name:'mysearch',
+        params:{keyword:this.searchKeyWord},
+        // query:{
+        //   keyword:this.searchKeyWord
+        // }
       })
     }
   },

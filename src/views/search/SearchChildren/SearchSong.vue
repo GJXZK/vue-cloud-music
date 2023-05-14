@@ -54,15 +54,16 @@ export default {
   created() {
     this.getMultimatch();
     this.getSearch();
+    
   },
   methods: {
     async getMultimatch() {
-      const res = await getMultimatch(this.$route.query.keyword);
+      const res = await getMultimatch(this.$route.params.keyword);
       this.multiMatch = res.data.result;
       console.log(this.multiMatch);
     },
     async getSearch() {
-      const res = await getSearch(this.$route.query.keyword);
+      const res = await getSearch(this.$route.params.keyword);
       console.log(res.data.result);
       this.searchSongList = res.data.result.songs;
       this.songCount = res.data.result.songCount;

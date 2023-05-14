@@ -11,8 +11,8 @@ const state = {
   musicUrl: "", //歌曲url
   musicId: "", //歌曲Id
   playState: false, //歌曲播放状态
-  // 实时播放时长 由audio中获取 用于进度条和歌词滚动
-  currentTime: 0,
+  // 由audio中获取 用于进度条和歌词滚动
+  currentTime: 0,  // 实时播放时长
   musicList: [],     //当前播放歌单
   musicListId: '',   // 当前播放歌单的id
 };

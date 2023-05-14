@@ -11,16 +11,16 @@ export default {
   name: "mySearch",
   components: { NavBar },
   created(){
-    console.log(this.$route.query.keyword);
+    console.log(this.$route.params.keyword);
   },
   data() {
     return {
       navBarData: [
-        { name: "单曲", path: `/search/searchsong/${this.$route.query.keyword}` },
-        { name: "歌手", path: `/search/searchsinger/${this.$route.query.keyword}`},
-        { name: "歌单", path: `/search/searchmusiclist/${this.$route.query.keyword}`},
-        { name: "视频", path: `/search/searchvideo/${this.$route.query.keyword}` },
-        { name: "专辑", path: `/search/searchalbum/${this.$route.query.keyword}` }
+        { name: "单曲", path: `/search/searchsong/${this.$route.params.keyword}` },
+        { name: "歌手", path: `/search/searchsinger/${this.$route.params.keyword}`},
+        { name: "歌单", path: `/search/searchmusiclist/${this.$route.params.keyword}`},
+        { name: "视频", path: `/search/searchvideo/${this.$route.params.keyword}` },
+        { name: "专辑", path: `/search/searchalbum/${this.$route.params.keyword}` }
       ]
     };
   },
