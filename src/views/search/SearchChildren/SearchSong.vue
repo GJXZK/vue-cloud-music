@@ -53,7 +53,6 @@ export default {
     };
   },
   created() {
-    console.log("我是SearchSong");
     this.getMultimatch();
     this.getSearch();
   },

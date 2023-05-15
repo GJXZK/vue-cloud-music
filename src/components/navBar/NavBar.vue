@@ -23,7 +23,7 @@ export default {
     };
   },
   created() {
-    console.log(this.$route.path);
+    // console.log(this.$route.path);
     // 根据地址判断 activeNum
     this.navBarData.forEach((item, index) => {
       if (decodeURI(this.$route.path).search(item.path) != -1) {

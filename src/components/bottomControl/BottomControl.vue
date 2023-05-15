@@ -58,7 +58,7 @@
         <span class="totalTime">{{ duration }}</span>
       </div>
     </div>
-    <!-- bottom右侧 播放列表  -->
+    <!-- bottom右侧  音乐控制 播放列表  -->
     <div class="right">
       <div class="volumeControl">
         <i class="iconfont icon-yinliang"></i>
@@ -102,7 +102,7 @@ export default {
       drawer: false,
       musicUrl: "",
       playType: "order", // 播放模式 （顺序播放 随机播放 order random）
-      musicList: [1], // 播放列表
+      musicList: [], // 播放列表
       duration: "00:00", //音乐总时长
       currentTime: 0, //当前播放时间
       timeProgress: 0, //进度条的位置
@@ -166,15 +166,22 @@ export default {
       this.currentTime = Math.floor((e / 100) * durationNum);
       this.$refs.audioPlayer.currentTime = this.currentTime;
     },
-    clickRow(){
+    clickRow() {
       console.log("点击播放");
+    },
+    // 更新播放列表
+    updateMusicList(value) {
+      this.musicList = value;
     }
   },
   watch: {
     "$store.state.musicId"(id) {
       console.log("vuex中的Id发生了变化");
+      this.pauseMusic();
+      this.updateMusicList(this.$store.state.musicList);
       this.getMusicUrl(id);
       this.getMusicDetail(id);
+      this.playMusic();
     }
   },
   filters: {
@@ -308,6 +315,13 @@ export default {
         }
       }
     }
+  }
+  .drawerHeader {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    margin-left: 20px;
+    color: #aaa;
   }
   .el-drawer__wrapper .el-drawer__container {
     height: calc(100vh - 70px) !important;
