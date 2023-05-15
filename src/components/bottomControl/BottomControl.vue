@@ -67,24 +67,23 @@
       <div class="playList" @click="openDrawer">
         <i class="iconfont icon-bofangliebiao"></i>
       </div>
+      <el-drawer :visible.sync="drawer" :with-header="false" size="100">
+        <div class="drawerHeader">总{{ musicList.length }}首</div>
+        <el-table
+          :data="musicList"
+          stripe
+          style="width: 100%"
+          :show-header="false"
+          @row-dblclick="clickRow"
+          highlight-current-row
+          lazy
+        >
+          <el-table-column prop="name" width="150px"></el-table-column>
+          <el-table-column prop="ar[0].name" width="80px"></el-table-column>
+          <el-table-column prop="dt" width="70px"></el-table-column>
+        </el-table>
+      </el-drawer>
     </div>
-    <!-- 抽屉 -->
-    <el-drawer :visible.sync="drawer" :with-header="false" width="300" size="100%">
-      <!-- <div class="drawerHeader">总{{ musicList.length }}首</div> -->
-      <!-- <el-table
-        :data="musicList"
-        stripe
-        style="width: 100%"
-        :show-header="false"
-        @row-dblclick="clickRow"
-        highlight-current-row
-        lazy
-      >
-        <el-table-column prop="name" width="150px"> </el-table-column>
-        <el-table-column prop="ar[0].name" width="80px"> </el-table-column>
-        <el-table-column prop="dt" width="70px"> </el-table-column>
-      </el-table>-->
-    </el-drawer>
   </div>
 </template>
 
@@ -106,7 +105,8 @@ export default {
       musicList: [1], // 播放列表
       duration: "00:00", //音乐总时长
       currentTime: 0, //当前播放时间
-      timeProgress: 0 //进度条的位置
+      timeProgress: 0, //进度条的位置
+      showPopup: false //
     };
   },
   computed: {
@@ -118,9 +118,10 @@ export default {
     // 点击打开抽屉的回调
     openDrawer() {
       // 关闭也是这个回调，所以直接取反
+      this.showPopup = !this.showPopup;
       this.drawer = !this.drawer;
       this.hasDrawerOpend = true;
-      this.handleDrawerListDOM(this.currentMusicIndex);
+      // this.handleDrawerListDOM(this.currentMusicIndex);
     },
     // 获取歌曲的播放地址
     async getMusicUrl(id) {
@@ -160,9 +161,13 @@ export default {
         this.timeProgress = Math.floor((time / durationNum) * 100);
       }
     },
+    // 拖拽进度条功能
     dragSlider(e) {
-      this.currentTime =Math.floor((e/100)*durationNum);
-      this.$refs.audioPlayer.currentTime=this.currentTime;
+      this.currentTime = Math.floor((e / 100) * durationNum);
+      this.$refs.audioPlayer.currentTime = this.currentTime;
+    },
+    clickRow(){
+      console.log("点击播放");
     }
   },
   watch: {
@@ -304,14 +309,11 @@ export default {
       }
     }
   }
-  .el-drawer__wrapper {
-    height: calc(100vh - 70px);
+  .el-drawer__wrapper .el-drawer__container {
+    height: calc(100vh - 70px) !important;
   }
-  .el-drawer__open {
-    height: calc(100vh - 70px);
-  }
-  .el-drawer {
-    height: calc(100vh - 70px);
+  .el-drawer.ttb {
+    height: 100% !important;
   }
 }
 </style>
