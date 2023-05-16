@@ -52,12 +52,13 @@
           v-model="timeProgress"
           :show-tooltip="false"
           :disabled="musicList.length == 0"
+          @change="dragSlider"
         ></el-slider>
-        
+
         <span class="totalTime">{{ duration }}</span>
       </div>
     </div>
-    <!-- bottom右侧 播放列表  -->
+    <!-- bottom右侧  音乐控制 播放列表  -->
     <div class="right">
       <div class="volumeControl">
         <i class="iconfont icon-yinliang"></i>
@@ -66,24 +67,23 @@
       <div class="playList" @click="openDrawer">
         <i class="iconfont icon-bofangliebiao"></i>
       </div>
+      <el-drawer :visible.sync="drawer" :with-header="false" size="100">
+        <div class="drawerHeader">总{{ musicList.length }}首</div>
+        <el-table
+          :data="musicList"
+          stripe
+          style="width: 100%"
+          :show-header="false"
+          @row-dblclick="clickRow"
+          highlight-current-row
+          lazy
+        >
+          <el-table-column prop="name" width="150px"></el-table-column>
+          <el-table-column prop="ar[0].name" width="80px"></el-table-column>
+          <el-table-column prop="dt" width="70px"></el-table-column>
+        </el-table>
+      </el-drawer>
     </div>
-    <!-- 抽屉 -->
-    <el-drawer :visible.sync="drawer" :with-header="false" width="300" size="100%">
-      <!-- <div class="drawerHeader">总{{ musicList.length }}首</div> -->
-      <!-- <el-table
-        :data="musicList"
-        stripe
-        style="width: 100%"
-        :show-header="false"
-        @row-dblclick="clickRow"
-        highlight-current-row
-        lazy
-      >
-        <el-table-column prop="name" width="150px"> </el-table-column>
-        <el-table-column prop="ar[0].name" width="80px"> </el-table-column>
-        <el-table-column prop="dt" width="70px"> </el-table-column>
-      </el-table>-->
-    </el-drawer>
   </div>
 </template>
 
@@ -102,10 +102,11 @@ export default {
       drawer: false,
       musicUrl: "",
       playType: "order", // 播放模式 （顺序播放 随机播放 order random）
-      musicList: [1], // 播放列表
+      musicList: [], // 播放列表
       duration: "00:00", //音乐总时长
       currentTime: 0, //当前播放时间
-      timeProgress: 0 //进度条的位置
+      timeProgress: 0, //进度条的位置
+      showPopup: false //
     };
   },
   computed: {
@@ -117,23 +118,22 @@ export default {
     // 点击打开抽屉的回调
     openDrawer() {
       // 关闭也是这个回调，所以直接取反
+      this.showPopup = !this.showPopup;
       this.drawer = !this.drawer;
       this.hasDrawerOpend = true;
-      this.handleDrawerListDOM(this.currentMusicIndex);
+      // this.handleDrawerListDOM(this.currentMusicIndex);
     },
     // 获取歌曲的播放地址
     async getMusicUrl(id) {
       const res = await getMusicUrl(id);
       this.musicUrl = res.data.data[0].url;
-      console.log(res);
     },
     // 获取歌曲详情
     async getMusicDetail(id) {
       const res = await getMusicDetail(id);
-      console.log(res.data.songs[0]);
       this.musicDetail = res.data.songs[0];
       this.duration = handleMusicTime(res.data.songs[0].dt);
-      durationNum = returnSecond(this.duration)
+      durationNum = returnSecond(this.duration);
     },
     // 播放音乐的函数
     playMusic() {
@@ -151,26 +151,40 @@ export default {
       !this.$store.state.playState ? this.playMusic() : this.pauseMusic();
     },
     // 更新播放时间
-    tiemupdate(){
-      let time = this.$refs.audioPlayer.currentTime
-      console.log(time);
+    tiemupdate() {
+      let time = this.$refs.audioPlayer.currentTime;
       this.$store.commit("updateCurrentTime", time);
       time = Math.floor(time);
-      if(time !== lastSecond ){
+      if (time !== lastSecond) {
         lastSecond = time;
         this.currentTime = time;
-        this.timeProgress = Math.floor((time/durationNum)*100)
+        this.timeProgress = Math.floor((time / durationNum) * 100);
       }
+    },
+    // 拖拽进度条功能
+    dragSlider(e) {
+      this.currentTime = Math.floor((e / 100) * durationNum);
+      this.$refs.audioPlayer.currentTime = this.currentTime;
+    },
+    clickRow() {
+      console.log("点击播放");
+    },
+    // 更新播放列表
+    updateMusicList(value) {
+      this.musicList = value;
     }
   },
   watch: {
     "$store.state.musicId"(id) {
       console.log("vuex中的Id发生了变化");
+      this.pauseMusic();
+      this.updateMusicList(this.$store.state.musicList);
       this.getMusicUrl(id);
       this.getMusicDetail(id);
+      this.playMusic();
     }
   },
-  filters:{
+  filters: {
     handleMusicTime
   }
 };
@@ -302,14 +316,18 @@ export default {
       }
     }
   }
-  .el-drawer__wrapper {
-    height: calc(100vh - 70px);
+  .drawerHeader {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    margin-left: 20px;
+    color: #aaa;
   }
-  .el-drawer__open {
-    height: calc(100vh - 70px);
+  .el-drawer__wrapper .el-drawer__container {
+    height: calc(100vh - 70px) !important;
   }
-  .el-drawer {
-    height: calc(100vh - 70px);
+  .el-drawer.ttb {
+    height: 100% !important;
   }
 }
 </style>

@@ -57,7 +57,7 @@ export default {
         }
         .playCount{
           position: absolute;
-          z-index: 100;
+          z-index: 10;
           right: 10px;
           top: 8px;
           color: white;

@@ -12,7 +12,7 @@
 .el-drawer.ltr,
 .el-drawer.rtl,
 .el-drawer__container {
-  height: calc(80vh - 55px) !important;
+  height: calc(100vh - 70px) !important;
 }
 .el-slider__bar {
   background-color: #ff4e4e !important;

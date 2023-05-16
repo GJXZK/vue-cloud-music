@@ -61,6 +61,9 @@ body {
   /* rem vw/vh */
   /* width: 100vw; */
 }
+.iconfont{
+  font-size: 20px !important;
+}
 
 a {
   color: var(--color-text);

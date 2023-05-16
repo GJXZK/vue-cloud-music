@@ -1,5 +1,5 @@
 <template>
-    <!-- 可复用nav  -->
+  <!-- 可复用nav  -->
   <div class="navBarContainer">
     <div class="navBar">
       <div
@@ -8,9 +8,7 @@
         v-for="(item,index) in navBarData"
         :key="index"
         @click="clickBarItem(item.path,index)"
-      >
-      {{ item.name}}
-      </div>
+      >{{ item.name}}</div>
     </div>
   </div>
 </template>
@@ -18,24 +16,29 @@
 <script>
 export default {
   name: "NavBar",
-  props:["navBarData"],
+  props: ["navBarData"],
   data() {
     return {
       activeNum: 0
     };
   },
-  created(){
-
+  created() {
+    // console.log(this.$route.path);
+    // 根据地址判断 activeNum
+    this.navBarData.forEach((item, index) => {
+      if (decodeURI(this.$route.path).search(item.path) != -1) {
+        this.activeNum = index;
+      }
+    });
   },
   methods: {
-    clickBarItem(path,index) {
+    clickBarItem(path, index) {
       if (this.activeNum == index) {
         return;
       }
-
-        console.log(path);
-        this.activeNum = index;
-        this.$emit("clickBarItem", path);
+      // console.log(path);
+      this.activeNum = index;
+      this.$emit("clickBarItem", path);
     }
   }
 };
