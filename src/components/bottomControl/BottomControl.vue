@@ -28,14 +28,14 @@
           <i class="iconfont icon-xunhuan" v-show="playType == 'order'"></i>
           <i class="iconfont icon-suiji" v-show="playType == 'random'"></i>
         </span>
-        <span>
+        <span @click="musicList.length != 0 ? changeMusic('pre') : '' ">
           <i class="iconfont icon-shangyishou"></i>
         </span>
         <span @click="musicList.length != 0 ? changePlayState() : ''">
           <i class="iconfont icon-icon_play" v-if="!this.$store.state.playState"></i>
           <i class="iconfont icon-zantingtingzhi" v-else></i>
         </span>
-        <span>
+        <span @click="musicList.length != 0 ? changeMusic('next') : '' ">
           <i class="iconfont icon-xiayishou"></i>
         </span>
         <span>
@@ -58,7 +58,7 @@
         <span class="totalTime">{{ duration }}</span>
       </div>
     </div>
-    <!-- bottom右侧  音乐控制 播放列表  -->
+    <!-- bottom右侧  音量控制 播放列表  -->
     <div class="right">
       <div class="volumeControl">
         <i class="iconfont icon-yinliang"></i>
@@ -106,7 +106,8 @@ export default {
       duration: "00:00", //音乐总时长
       currentTime: 0, //当前播放时间
       timeProgress: 0, //进度条的位置
-      showPopup: false //
+      showPopup: false, //
+      currentMusicIndex: 0 //
     };
   },
   computed: {
@@ -115,6 +116,35 @@ export default {
     }
   },
   methods: {
+    getMusicDetailFromMusicList() {
+      // console.log(this.musicList);
+      // this.musicList.forEach((item, index) => {
+      //   // console.log(index);
+      //   if (item.id == this.$store.state.musicId) {
+      //     // 记录当前音乐的index
+      //     this.currentMusicIndex = index;
+      //     // 将索引传至vuex
+      //     this.$store.commit("updateCurrentIndex", index);
+      //     this.musicDetail = item;
+      //     // 直接从audio标签中的duration属性拿时长会有请求时差问题，所以直接在musicInfo中拿
+      //     this.duration = this.musicList[index].dt;
+      //   }
+      // });
+
+      let index = this.musicList.findIndex(
+        item => item.id == this.$store.state.musicId
+      );
+      console.log(index);
+      if (index != -1) {
+        // 记录当前音乐的index
+        this.currentMusicIndex = index;
+        // 将索引传至vuex
+        this.$store.commit("updateCurrentIndex", index);
+        this.musicDetail = this.musicList[index];
+        // 直接从audio标签中的duration属性拿时长会有请求时差问题，所以直接在musicInfo中拿
+        this.duration = this.musicList[index].dt;
+      }
+    },
     // 点击打开抽屉的回调
     openDrawer() {
       // 关闭也是这个回调，所以直接取反
@@ -166,12 +196,64 @@ export default {
       this.currentTime = Math.floor((e / 100) * durationNum);
       this.$refs.audioPlayer.currentTime = this.currentTime;
     },
-    clickRow() {
-      console.log("点击播放");
+    clickRow(row) {
+      console.log(row);
+      this.changeMusic('click',row.id)
     },
     // 更新播放列表
     updateMusicList(value) {
       this.musicList = value;
+    },
+    // 切歌函数
+    changeMusic(type, id) {
+      if (type == "click") {
+        // 点击抽屉row进行切歌
+        this.$store.commit("updataMusicId", id);
+      } else if (type == "pre") {
+        console.log("上一曲");
+        let currentMusicIndex = this.currentMusicIndex;
+        let preIndex;
+        if (this.playType == "order") {
+          preIndex =
+            currentMusicIndex - 1 < 0
+              ? this.musicList.length - 1
+              : currentMusicIndex - 1;
+        } else if (this.playType == "random") {
+          if (this.musicList.length == 1) {
+            preIndex = currentMusicIndex;
+          } else {
+            // Math.floor(Math.random()*10); 可均衡获取0到9的随机整数。
+            preIndex = currentMusicIndex;
+            while (preIndex == currentMusicIndex) {
+              preIndex = Math.floor(Math.random() * this.musicList.length);
+            }
+          }
+        }
+        console.log(this.musicList[preIndex].id);
+        this.$store.commit("updataMusicId", this.musicList[preIndex].id);
+      } else if (type == "next") {
+        console.log("下一曲");
+        let currentMusicIndex = this.currentMusicIndex;
+        let nextIndex;
+        if (this.playType == "order") {
+          nextIndex =
+            currentMusicIndex + 1 == this.musicList.length
+              ? 0
+              : currentMusicIndex + 1;
+        } else if (this.playType == "random") {
+          if (this.musicList.length == 1) {
+            nextIndex = currentMusicIndex;
+          } else {
+            // Math.floor(Math.random()*10); 可均衡获取0到9的随机整数。
+            nextIndex = currentMusicIndex;
+            while (nextIndex == currentMusicIndex) {
+              nextIndex = Math.floor(Math.random() * this.musicList.length);
+            }
+          }
+        }
+        console.log(this.musicList[nextIndex].id);
+        this.$store.commit("updataMusicId", this.musicList[nextIndex].id);
+      }
     }
   },
   watch: {
@@ -180,6 +262,7 @@ export default {
       this.pauseMusic();
       this.updateMusicList(this.$store.state.musicList);
       this.getMusicUrl(id);
+      this.getMusicDetailFromMusicList()
       this.getMusicDetail(id);
       this.playMusic();
     }
@@ -261,7 +344,8 @@ export default {
       span {
         display: flex;
       }
-      span:nth-child(3) {
+      span:nth-child(3),
+      span:nth-child(4) {
         width: 40px;
         display: flex;
         justify-content: center;

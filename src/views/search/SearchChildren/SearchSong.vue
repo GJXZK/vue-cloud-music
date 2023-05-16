@@ -21,7 +21,7 @@
     <!-- 歌曲列表 -->
     <el-table
       :data="searchSongList"
-      size="small"
+      size="medium"
       style="width: 100%"
       @row-dblclick="clickRow"
       @cell-click="clickCell"
