@@ -39,7 +39,7 @@
 
 .el-table .cell {
   line-height: 20px !important;
-  font-size: 12px !important;
+  font-size: 14px !important;
   transform: scale(0.88);
   color: rgb(128, 128, 128) !important;
   text-overflow: ellipsis !important;

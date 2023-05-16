@@ -2,7 +2,7 @@
   <!-- 歌曲展示模块 -->
   <div class="musicCard">
     <div class="musicItem" v-for="(item,index) in newSongs" :key="index">
-      <div class="itemContent" @click="playMusic(item.id)">
+      <div class="itemContent" @click="playMusic(item)">
         <!-- 歌曲封面 -->
         <div class="musicimg">
           <img :src="item.picUrl" alt />
@@ -23,8 +23,26 @@
 export default {
   props: ["newSongs"],
   methods: {
-    async playMusic(id) {
-        this.$store.commit('updataMusicId',id);
+    async playMusic(item) {
+        // 这里双击应该是要把当前双击的歌曲插入到当前的歌单中
+      // 首先获取当前的歌单列表和歌曲索引
+      let musicList = this.$store.state.musicList;
+      let currentIndex = this.$store.state.currentIndex;
+      // 先判断该歌曲是否已经在歌单中存在，避免重复点击导致歌单出现相同歌曲
+      let isExist = musicList.find(item => item.id == item.id);
+      if (isExist) {
+        // 如果已经存在 则只提交歌曲id并return出去
+        this.$store.commit("updataMusicId", item.id);
+        return;
+      }
+      this.$store.commit("updataPlayState", false);
+      // 将请求到的歌曲详情插入到歌单对应位置并提交至vuex
+      musicList.splice(currentIndex + 1, 0, item);
+      this.$store.commit("updataMusicId", item.id);
+      this.$store.commit("updataMusicList", {
+        musicList,
+        musicListId: this.$store.state.musicListId
+      });
         
     }
   }
