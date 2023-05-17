@@ -2,7 +2,7 @@
   <!-- 歌单列表组件  -->
   <div class="listCard">
     <div class="listItem" v-for="(item,index) in musicLists" :key="index">
-      <div class="itemBox">
+      <div class="itemBox" @click="gotoMusicListDetail(item.id)">
         <div class="imgbox">
           <img :src="item.picUrl" alt />
           <!-- 右上角播放量 -->
@@ -21,6 +21,13 @@ export default {
   methods: {
     changeNum(num) {
       return handleNum(num);
+    },
+    gotoMusicListDetail(id) {
+      console.log(id);
+      this.$router.push({
+        name: "musiclistdetail",
+        params: { id: id }
+      });
     }
   }
 };
@@ -43,19 +50,19 @@ export default {
         width: 100%;
         border-radius: 20px;
         overflow: hidden;
-        img::after{
-          content: '';
+        img::after {
+          content: "";
           width: 100%;
           position: absolute;
           top: 0;
           left: 0;
-          background: url('@/assets/img/imgLoading.png');
+          background: url("@/assets/img/imgLoading.png");
           background-size: contain;
         }
         img {
           width: 100%;
         }
-        .playCount{
+        .playCount {
           position: absolute;
           z-index: 10;
           right: 10px;

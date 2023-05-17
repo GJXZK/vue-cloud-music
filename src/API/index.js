@@ -27,3 +27,11 @@ export function getMultimatch(keyword){
 export function getSearch(keyword){
     return  request(`/cloudsearch?keywords=${keyword}`)
 }
+
+
+// 歌单
+export function getMusicListDetailById(id){
+    // var timestamp = Date.parse(new Date());
+    // return request(`/playlist/detail?id=${id}&timestamp=${timestamp}`)
+    return request(`/playlist/detail?id=${id}`)
+}

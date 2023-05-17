@@ -62,7 +62,12 @@
     <div class="right">
       <div class="volumeControl">
         <i class="iconfont icon-yinliang"></i>
-        <el-slider class="volumeSlider" v-model="volume"></el-slider>
+        <el-slider
+           class="volumeSlider" 
+           v-model="volume"
+           @input="changeVolume"
+           :show-tooltip="false"
+        ></el-slider>
       </div>
       <div class="playList" @click="openDrawer">
         <i class="iconfont icon-bofangliebiao"></i>
@@ -93,12 +98,13 @@ import { getMusicUrl, getMusicDetail } from "@/API/index";
 import { handleMusicTime, returnSecond } from "@/plugins/utils";
 let lastSecond = 0;
 let durationNum = 0;
-// let volumeSave = 0;
+let volumeSave = 0;
 export default {
   data() {
     return {
       musicDetail: {},
-      volume: 300,
+      volume: 30,
+      isMuted: false,
       drawer: false,
       musicUrl: "",
       playType: "order", // 播放模式 （顺序播放 随机播放 order random）
@@ -254,7 +260,29 @@ export default {
         console.log(this.musicList[nextIndex].id);
         this.$store.commit("updataMusicId", this.musicList[nextIndex].id);
       }
-    }
+    },
+     // 拖动音量条的回调
+     changeVolume(e) {
+      // 改变audio的音量
+      // input事件 实时触发
+      this.$refs.audioPlayer.volume = e / 100;
+      if (this.isMuted && e > 0) {
+        this.isMuted = false;
+      } else if (e == 0 && this.isMuted == false) {
+        this.isMuted = true;
+      }
+    },
+    // 点击小喇叭的回调 （切换静音状态）
+    changeMutedState() {
+      if (this.isMuted) {
+        this.volume = volumeSave;
+      } else {
+        volumeSave = this.volume;
+        this.volume = 0;
+      }
+      console.log(volumeSave, this.isMuted);
+      this.isMuted = !this.isMuted;
+    },
   },
   watch: {
     "$store.state.musicId"(id) {
