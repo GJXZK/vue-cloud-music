@@ -30,8 +30,12 @@ export function getSearch(keyword){
 
 
 // 歌单
+// 获取歌单详情
 export function getMusicListDetailById(id){
     // var timestamp = Date.parse(new Date());
     // return request(`/playlist/detail?id=${id}&timestamp=${timestamp}`)
     return request(`/playlist/detail?id=${id}`)
+}
+export function getMusicListComment(id,page){
+    return request(`/comment/playlist?id=${id}&limit=50&offset=${(page-1)*50}`)
 }
