@@ -46,20 +46,22 @@
         <router-view></router-view>
       </el-main>
     </el-container>
-
     <!-- 底部音乐控制器 -->
     <BottomControl></BottomControl>
+    <MusicDetailCard></MusicDetailCard>
   </el-container>
 </template>
 
 <script>
 import BottomControl from "@/components/bottomControl/BottomControl";
 import HeaderBar from "@/components/HeaderBar/HeaderBar";
+import MusicDetailCard from "@/views/musicDetailCard/MusicDetailCard.vue";
 export default {
   name: "MyIndex",
   components: {
     BottomControl,
-    HeaderBar
+    HeaderBar,
+    MusicDetailCard,
   },
   data(){
     return {

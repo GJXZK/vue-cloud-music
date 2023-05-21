@@ -16,6 +16,8 @@ const state = {
   musicListId: "", // 当前播放歌单的id
   currentIndex: -1, //当前播放音乐的索引
   searchKeyword: "", //搜索关键字 解决搜索后无法在搜索的问题
+  // 音乐详情卡片的显隐
+  isMusicDetailCardShow: false,
 };
 // 创建Store对象
 const store = new Vuex.Store({
@@ -61,6 +63,9 @@ const store = new Vuex.Store({
     updataSearchKeyword(state, value) {
       state.searchKeyword = value;
     },
+    changeMusicDetailCardState(state){
+      state.isMusicDetailCardShow = !state.isMusicDetailCardShow;
+    }
   },
 });
 

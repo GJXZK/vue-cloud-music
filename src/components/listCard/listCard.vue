@@ -47,7 +47,8 @@ export default {
       width: 80%;
       .imgbox {
         position: relative;
-        width: 100%;
+        width: 200px;
+        height: 200px;
         border-radius: 20px;
         overflow: hidden;
         img {
@@ -61,7 +62,7 @@ export default {
           color: white;
         }
       }
-      .imgbox::after {
+      .imgbox::before {
         content: "";
         position: absolute;
         height: 100%;
@@ -72,6 +73,9 @@ export default {
         background-size: contain;
         z-index: -1;
       }
+    }
+    .title{
+      margin-top: 10px;
     }
   }
 }

@@ -11,7 +11,7 @@
     ></audio>
     <!-- bottom左侧 歌曲图标 点击图标弹出播放界面 歌曲信息 -->
     <div class="left">
-      <div class="musicpic">
+      <div class="musicpic" @click="openMusicDetailCard">
         <img :src="musicDetail.al.picUrl" alt v-if="musicDetail.al" />
         <img src="../../assets/img/test.jpg" v-else alt />
       </div>
@@ -283,6 +283,10 @@ export default {
       console.log(volumeSave, this.isMuted);
       this.isMuted = !this.isMuted;
     },
+    // 点击歌曲图片 打开歌曲详情
+    openMusicDetailCard(){
+      this.$store.commit("changeMusicDetailCardState")
+    } 
   },
   watch: {
     "$store.state.musicId"(id) {
