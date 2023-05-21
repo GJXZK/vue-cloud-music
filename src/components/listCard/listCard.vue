@@ -4,7 +4,7 @@
     <div class="listItem" v-for="(item,index) in musicLists" :key="index">
       <div class="itemBox" @click="gotoMusicListDetail(item.id)">
         <div class="imgbox">
-          <img :src="item.picUrl" alt />
+          <img class="MusicListAvatar" :src="item.picUrl" alt />
           <!-- 右上角播放量 -->
           <span class="playCount">{{ changeNum(item.playCount)}}</span>
         </div>
@@ -50,15 +50,6 @@ export default {
         width: 100%;
         border-radius: 20px;
         overflow: hidden;
-        img::after {
-          content: "";
-          width: 100%;
-          position: absolute;
-          top: 0;
-          left: 0;
-          background: url("@/assets/img/imgLoading.png");
-          background-size: contain;
-        }
         img {
           width: 100%;
         }
@@ -69,6 +60,17 @@ export default {
           top: 8px;
           color: white;
         }
+      }
+      .imgbox::after {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        background: url("@/assets/img/imgLoading.png") no-repeat;
+        background-size: contain;
+        z-index: -1;
       }
     }
   }

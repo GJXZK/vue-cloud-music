@@ -71,7 +71,7 @@
           <!-- 表格 -->
           <el-table
             :data="musicListDetail.tracks"
-            size="mini"
+            size="medium"
             style="width: 100%"
             @row-dblclick="clickRow"
             @cell-click="clickCell"
@@ -109,7 +109,7 @@
               :commentType="'musicList'"
               :comments="comments.hotComments"
               :commentId="musicListDetail.id + ''"
-              @getComment="getMusicListComment"
+              @getComment="getMusicListComments"
               @scrollToComment="scrollToComment"
               v-if="comments.hotComments"
               ref="hotComments"
@@ -165,7 +165,9 @@ export default {
       isCreated: false,
       currentCommentPage: 1,
       // 是否禁止滚动加载
-      scrollLoadDisabled: false
+      scrollLoadDisabled: false,
+      isCommentLoading:false,
+      isMore:false,
     };
   },
   components: {
@@ -211,7 +213,20 @@ export default {
     },
     playAll() {},
     collectList() {},
-    scrollToComment() {}
+    scrollToComment() {},
+    clickCell(){},
+    commentPageChange(){},
+     // 事件函数
+     handleIndex(index) {
+      // console.log(index);
+      index += 1;
+      if (index < 10) {
+        return "0" + index;
+      } else {
+        return index;
+      }
+    },
+
   },
   mounted() {
     this.getMusicListDetail();
@@ -247,7 +262,7 @@ export default {
         width: 120%;
       }
     }
-    .listAvatar::after {
+    .listAvatar::before {
       content: "";
       position: absolute;
       height: 100%;
@@ -265,7 +280,7 @@ export default {
       .title {
         display: flex;
         .titleTag {
-          font-size: 12px;
+          font-size: 14px;
           color: #ec4141;
           border: 1px solid #ec4141;
           padding: 1px 2px;
@@ -339,14 +354,18 @@ export default {
         }
       }
       .desc {
-        margin: 5px 0 0 -30px;
         font-size: 12px;
-        transform: scale(0.9);
+        // transform: scale(0.9);
         overflow: hidden;
         text-overflow: ellipsis;
-        white-space: nowrap;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
       }
     }
+  }
+  .musicList {
+    margin: -20px 30px;
   }
 }
 </style>
