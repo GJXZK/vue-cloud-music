@@ -27,8 +27,14 @@ export function getMultimatch(keyword){
 export function getSearch(keyword){
     return  request(`/cloudsearch?keywords=${keyword}`)
 }
-
-
+// 获取歌词
+export function getLyric(id){
+    return request(`/lyric?id=${id}`)
+}
+// 获取歌曲评论
+export function getMusicComments(id){
+    return request(`/comment/music?id=${id}&limit=10`)
+}
 // 歌单
 // 获取歌单详情
 export function getMusicListDetailById(id){
