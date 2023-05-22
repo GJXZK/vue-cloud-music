@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkvue_cloud"]=self["webpackChunkvue_cloud"]||[]).push([[941],{4941:function(u,e,n){n.r(e),n.d(e,{default:function(){return a}});var t=function(){var u=this;u._self._c;return u._m(0)},l=[function(){var u=this,e=u._self._c;return e("div",{staticClass:"SearchVideo"},[e("h1",[u._v("搜索视频")])])}],c={},r=c,s=n(1001),i=(0,s.Z)(r,t,l,!1,null,null,null),a=i.exports}}]);
+//# sourceMappingURL=941.26e5137d.js.map

@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkvue_cloud"]=self["webpackChunkvue_cloud"]||[]).push([[140],{140:function(u,e,n){n.r(e),n.d(e,{default:function(){return a}});var t=function(){var u=this;u._self._c;return u._m(0)},l=[function(){var u=this,e=u._self._c;return e("div",{staticClass:"video"},[e("h1",[u._v("视频")])])}],s={name:"myVideo"},c=s,r=n(1001),i=(0,r.Z)(c,t,l,!1,null,null,null),a=i.exports}}]);
+//# sourceMappingURL=140.f9ec41de.js.map

@@ -6,7 +6,7 @@ module.exports = defineConfig({
   devServer:{
     proxy:{
       '/api':{
-        target:'http://localhost:3000',
+        target:'https://autumnfish.cn',
         changeOrigin:true,
         ws:true,
         pathRewrite:{
@@ -14,6 +14,7 @@ module.exports = defineConfig({
         }
       }
     }
-  }
+  },
+  publicPath:'/vue-cloudmusic/'
 })
 

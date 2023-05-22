@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkvue_cloud"]=self["webpackChunkvue_cloud"]||[]).push([[826],{4826:function(u,n,e){e.r(n),e.d(n,{default:function(){return f}});var l=function(){var u=this;u._self._c;return u._m(0)},t=[function(){var u=this,n=u._self._c;return n("div",{staticClass:"SearchAlbum"},[n("h1",[u._v("搜索专辑")])])}],c={},r=c,s=e(1001),a=(0,s.Z)(r,l,t,!1,null,null,null),f=a.exports}}]);
+//# sourceMappingURL=826.0d9e35a1.js.map
