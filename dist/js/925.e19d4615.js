@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkvue_cloud"]=self["webpackChunkvue_cloud"]||[]).push([[925],{5925:function(u,e,n){n.r(e),n.d(e,{default:function(){return a}});var c=function(){var u=this;u._self._c;return u._m(0)},s=[function(){var u=this,e=u._self._c;return e("div",{staticClass:"recommendmusic"},[e("h1",[u._v("每日推荐")])])}],t={name:"myRecommendmusic"},l=t,r=n(1001),i=(0,r.Z)(l,c,s,!1,null,null,null),a=i.exports}}]);
-//# sourceMappingURL=925.e19d4615.js.map
