@@ -15,6 +15,6 @@ module.exports = defineConfig({
       }
     }
   },
-  publicPath:'/vue-cloudmusic/'
+  publicPath:'/cloudmusic/'
 })
 

@@ -98,6 +98,7 @@ const routes = [
 const router = new VueRouter({
   routes,
   mode: "history",
+  base:'/cloudmusic/'
 });
 
 export default router;
