@@ -45,7 +45,7 @@
         </div>
         <!-- 标签 -->
         <div class="tags">
-          标签：
+          标签 :
           <div class="tagItem" v-for="(item, index) in musicListDetail.tags" :key="index">{{ item }}</div>
           <div v-if="musicListDetail.tags.length == 0">暂无标签</div>
         </div>

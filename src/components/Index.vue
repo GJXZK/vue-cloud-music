@@ -17,7 +17,6 @@
         <el-menu 
           active-text-color="black" 
           router 
-          
           >
           <!-- :default-active="defaultActive" -->
           <!-- 发现音乐 -->
@@ -82,6 +81,10 @@ export default {
 .el-aside {
   background-color: #ccc;
   height: calc(100vh - 140px);
+  
+}
+.el-aside span{
+  margin-left: 10px;
 }
 .el-main{
   padding: 0px;
