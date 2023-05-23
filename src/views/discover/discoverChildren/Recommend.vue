@@ -45,6 +45,8 @@ export default {
     async getBannerList(){
       const res = await getBannerList()
       this.bannerList=res.data.banners
+      console.log(res)
+      console.log(this.bannerList);
     },
     async getNewsong(){
         const res = await getNewsong()

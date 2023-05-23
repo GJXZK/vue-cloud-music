@@ -46,7 +46,7 @@ export default {
   data() {
     return {
       // 是否显示歌曲详情界面
-      isMusicDetailCardShow: true,
+      isMusicDetailCardShow: false,
       musicInfo: {
         name: "AAA"
       },

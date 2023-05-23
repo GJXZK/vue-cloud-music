@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkvue_cloud"]=self["webpackChunkvue_cloud"]||[]).push([[815],{4815:function(u,n,s){s.r(n),s.d(n,{default:function(){return a}});var t=function(){var u=this;u._self._c;return u._m(0)},l=[function(){var u=this,n=u._self._c;return n("div",{staticClass:"musiclist"},[n("h1",[u._v("歌单")])])}],e={name:"myMusiclist"},c=e,i=s(1001),r=(0,i.Z)(c,t,l,!1,null,null,null),a=r.exports}}]);
+//# sourceMappingURL=815.3d1819b2.js.map
