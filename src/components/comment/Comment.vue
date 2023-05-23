@@ -20,38 +20,7 @@
       </div>
     </div>
     <!-- 音乐单曲评论 -->
-    <div class="musicComment" v-else-if="commentType != '' && commentType == 'music'">
-      <el-button class="commentCardSwitch" size="mini" round @click="openDialog">
-        <i class="iconfont icon-ziyuan"></i> 发表我的音乐评论
-      </el-button>
-      <el-dialog
-        :visible="isCommentDialogShow"
-        width="400px"
-        @close="closeCommentDialog"
-        append-to-body
-        class="commentDialog"
-      >
-        <div class="musicTitle">歌曲：{{ musicTitle }}</div>
-        <el-input
-          type="textarea"
-          class="commentArea musicCommentArea"
-          maxlength="140"
-          show-word-limit
-          v-model="commentInput"
-          @input="inputComment"
-          placeholder="留下你的评论"
-        ></el-input>
-        <!-- 提交评论 -->
-        <div class="submitCommentButton">
-          <el-button
-            size="mini"
-            round
-            @click="commentMode ? submitComment() : submitFloorComment()"
-            class="submitComment musicSubmitComment"
-          >评论</el-button>
-        </div>
-      </el-dialog>
-    </div>
+    
     <div class="commentHeader">
       <slot name="title"></slot>
     </div>

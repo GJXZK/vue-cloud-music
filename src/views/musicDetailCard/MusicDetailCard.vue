@@ -299,7 +299,7 @@ export default {
   width: 100%;
   height: 100%;
   z-index: -2;
-  filter: blur(300px);
+  filter: blur(10000px);
 }
 .hide {
   bottom: calc(-100vh + 70px);

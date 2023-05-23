@@ -79,7 +79,6 @@ export default {
   z-index: 100;
 }
 .el-aside {
-  background-color: #ccc;
   height: calc(100vh - 140px);
   
 }

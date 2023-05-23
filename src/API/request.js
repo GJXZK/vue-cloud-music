@@ -8,6 +8,7 @@ export function request(url, params) {
   // 请求超过30秒则判定为超时
   const instance = axios.create({
     baseURL: '/api',
+    // baseURL:'http://www.codeman.ink:3000',
     timeout: 30000,
     withCredentials: true,
   });
