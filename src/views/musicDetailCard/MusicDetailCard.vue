@@ -5,9 +5,8 @@
         展示歌曲信息 旋转碟片  滚动歌词  热门评论
         通过改变界面到底部的距离  实现显示和隐藏 需要获取音乐详情 歌词  
   -->
-  <div class="musicDetailCard" :class="[
-        isMusicDetailCardShow ? '' : 'hide',
-       ]">
+  <div class="musicDetailCard" :class="[isMusicDetailCardShow ? '' : 'hide']">
+    <img class="bg-blur" :src="musicInfo.al.picUrl" alt v-if="musicInfo.al" />
     <div class="closeCard" @click="colseCard">
       <i class="iconfont icon-arrow-down-bold"></i>
     </div>
@@ -19,21 +18,57 @@
           <div class="left">
             <div class="discContainer">
               <!-- 针 -->
-              <div class="needle">
+              <div class="needle" :class="$store.state.playState ? 'needleRotate' : ''">
                 <img src="@/assets/img/MusicDetailCard/needle.png" alt />
               </div>
               <!-- 碟 -->
-              <div class="disc">
+              <div
+                class="disc"
+                :class="[
+                $store.state.playState ? '':'pause',
+                $store.state.isMusicLoad ? '':'discAnimation'
+              ]"
+              >
                 <img src="@/assets/img/MusicDetailCard/disc.png" alt />
-                <img src="@/assets/img/test.jpg" alt="" v-if="!musicInfo.al">
-                <img :src="musicInfo.al.picUrl" alt="" class="musicAvatar" v-else>
+                <img
+                  src="@/assets/img/test.jpg"
+                  alt
+                  class="musicAvatar"
+                  v-if="!musicInfo.al.picUrl"
+                />
+                <img :src="musicInfo.al.picUrl" alt class="musicAvatar" v-else />
               </div>
             </div>
           </div>
-          <div class="right"></div>
+          <!-- 歌曲名 歌曲专辑 歌手 -->
+          <div class="right">
+            <div class="title">
+              <div class="musicName">{{ musicInfo.name }}</div>
+              <div class="album">{{ musicInfo.al.name }}</div>
+              <div class="singer">{{ musicInfo.ar[0].name }}</div>
+            </div>
+            <!-- 歌词 -->
+            <LyricsScroll :lyric="lyric"></LyricsScroll>
+          </div>
         </div>
         <!-- 评论 -->
-        <div class="bottom"></div>
+        <div
+          class="bottom"
+          v-loading="isCommentLoading"
+          element-loading-background="rgba(255, 255, 255, 0.1)"
+        >
+          <comment
+            :comments="comment.comments"
+            :commentType="'music'"
+            :commentId="$store.state.musicId + ''"
+            :musicTitle="musicInfo.name"
+            @getComment="getMusicComment($store.state.musicId)"
+            class="commentComponent"
+          >
+            <div slot="title">最新评论({{ comment.total }})</div>
+          </comment>
+        </div>
+        <!-- <go-top scrollObj=".musicDetailCardContainer"></go-top> -->
       </div>
     </div>
     <div class="tip" v-else>暂无歌曲信息</div>
@@ -42,17 +77,23 @@
 
 <script>
 import { getLyric, getMusicComments } from "@/API/index";
+import LyricsScroll from "@/components/lyricsScroll/LyricsScroll";
+import Comment from "@/components/comment/Comment.vue";
 export default {
   data() {
     return {
       // 是否显示歌曲详情界面
       isMusicDetailCardShow: false,
       musicInfo: {
-        name: "AAA"
+        name: ""
       },
-      lyric: [[0, "正在加载歌词"]]
+      lyric: [[0, "正在加载歌词"]],
+      isCommentLoading: false,
+      currentCommentPage:1,
+      comment:{}
     };
   },
+  components: { LyricsScroll,Comment },
   methods: {
     colseCard() {
       this.$store.commit("changeMusicDetailCardState");
@@ -60,10 +101,38 @@ export default {
     async getLyric(id) {
       let res = await getLyric(id);
       console.log(res);
+      let lyrics = res.data.lrc.lyric;
+      // 对获取到的歌词进行处理
+      let arr = lyrics.split("\n");
+      let array = [];
+      // let obj = {};
+      let time = "";
+      let value = "";
+      let result = [];
+
+      //去除空行
+      arr.forEach(item => {
+        if (item != "") {
+          array.push(item);
+        }
+      });
+      arr = array;
+      arr.forEach(item => {
+        time = item.split("]")[0];
+        value = item.split("]")[1];
+        //去掉时间里的中括号得到xx:xx.xx
+        var t = time.slice(1).split(":");
+        //将结果压入最终数组
+        result.push([parseInt(t[0], 10) * 60 + parseFloat(t[1]), value]);
+      });
+
+      this.lyric = result;
+      // console.log(this.lyric);
     },
     async getMusicComment(id) {
       let res = await getMusicComments(id);
       console.log(res);
+      this.comment = res.data;
     }
   },
   watch: {
@@ -76,6 +145,11 @@ export default {
         console.log("获取歌词");
         this.getLyric(this.$store.state.musicId);
         this.getMusicComment(this.$store.state.musicId);
+        this.musicInfo = this.$store.state.musicList[
+          this.$store.state.currentIndex
+        ];
+        console.log("歌曲信息");
+        console.log(this.musicInfo);
       }
     },
     // 当Vuex中的 musicId 发生变化，获取评论 歌词
@@ -113,22 +187,20 @@ export default {
   .musicDetailContainer {
     height: 100%;
     margin: 0px auto;
-    background-color: #ccc;
     overflow-y: scroll;
     display: flex;
+    z-index: 0;
     .w {
       margin: 0 auto;
       width: 60%;
       height: 100%;
-      background-color: #fff;
+      z-index: 0;
       .top {
         width: 100%;
         height: 550px;
-        background-color: #fff;
         display: flex;
         .left {
           flex: 50%;
-          background-color: pink;
           .discContainer {
             margin: 60px auto;
             width: 250px;
@@ -145,42 +217,74 @@ export default {
                 width: 100%;
               }
             }
-            .needleRotate{
+            // 播放模式下 针的位置
+            .needleRotate {
               transform: rotate(22deg);
             }
             .disc {
               width: 250px;
               height: 250px;
               position: relative;
+              border-radius: 125px;
+              overflow: hidden;
               top: -12px;
-              img {
+              img:nth-child(1) {
                 width: 100%;
+                z-index: 1;
+              }
+              .musicAvatar {
+                position: absolute;
+                top: 35px;
+                left: 35px;
+                width: 190px;
+                z-index: -1;
               }
             }
-            .discAnimation{
+
+            .discAnimation {
               animation: disc 25s linear infinite;
               animation-delay: 0.8s;
             }
-            @keyframes disc{
-              from{
+            @keyframes disc {
+              from {
                 transform: rotate(0deg);
               }
-              to{
+              to {
                 transform: rotate(360deg);
               }
+            }
+            .pause {
+              animation-play-state: paused;
+              -webkit-animation-play-state: paused;
             }
           }
         }
         .right {
           flex: 50%;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-around;
+          .title {
+            width: 100%;
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .musicName {
+              font-size: 30px;
+              color: rgb(22, 22, 22);
+            }
+          }
         }
       }
       .bottom {
         height: 1000px;
-        background-color: #ccc;
       }
     }
   }
+
   .tip {
     width: 100%;
     height: 100%;
@@ -188,6 +292,13 @@ export default {
     align-items: center;
     justify-content: center;
   }
+}
+.bg-blur {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  filter: blur(300px);
 }
 .hide {
   bottom: calc(-100vh + 70px);
