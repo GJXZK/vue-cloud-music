@@ -88,7 +88,7 @@ export default {
         name: ""
       },
       lyric: [[0, "正在加载歌词"]],
-      isCommentLoading: false,
+      isCommentLoading: true,
       currentCommentPage:1,
       comment:{}
     };
@@ -133,6 +133,7 @@ export default {
       let res = await getMusicComments(id);
       console.log(res);
       this.comment = res.data;
+      this.isCommentLoading = false
     }
   },
   watch: {
