@@ -15,17 +15,17 @@
         <listCard :musicLists="musicLists"></listCard>
     </div>
     <!-- 新歌速递 -->
-    <div class="recommendMusicList">
+    <!-- <div class="recommendMusicList">
         <h3>新歌速递<i class="iconfont icon-arrow-right-bold"></i></h3>
         <musicCard :newSongs="newSongs"></musicCard>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
 import {getBannerList,getNewsong, getMusicList} from '@/API/index'
 import listCard from '@/components/listCard/listCard'
-import musicCard from '@/components/musicCard/musicCard'
+// import musicCard from '@/components/musicCard/musicCard'
 export default {
   name: "my-recommend",
   data(){
@@ -35,7 +35,7 @@ export default {
         musicLists:[]
     }
   },
-  components:{listCard,musicCard},
+  components:{listCard},
   created(){
     this.getBannerList()
     this.getNewsong()

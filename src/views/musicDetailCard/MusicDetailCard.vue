@@ -45,7 +45,10 @@
             <div class="title">
               <div class="musicName">{{ musicInfo.name }}</div>
               <div class="album" @click="goAlbumDetail(musicInfo.al.id)">{{ musicInfo.al.name }}</div>
-              <div class="singer" @click="goSingerDetail(musicInfo.ar[0].id)">{{ musicInfo.ar[0].name }}</div>
+              <div
+                class="singer"
+                @click="goSingerDetail(musicInfo.ar[0].id)"
+              >{{ musicInfo.ar[0].name }}</div>
             </div>
             <!-- 歌词 -->
             <LyricsScroll :lyric="lyric"></LyricsScroll>
@@ -89,11 +92,11 @@ export default {
       },
       lyric: [[0, "正在加载歌词"]],
       isCommentLoading: true,
-      currentCommentPage:1,
-      comment:{}
+      currentCommentPage: 1,
+      comment: {}
     };
   },
-  components: { LyricsScroll,Comment },
+  components: { LyricsScroll, Comment },
   methods: {
     colseCard() {
       this.$store.commit("changeMusicDetailCardState");
@@ -133,20 +136,20 @@ export default {
       let res = await getMusicComments(id);
       console.log(res);
       this.comment = res.data;
-      this.isCommentLoading = false
+      this.isCommentLoading = false;
     },
-    goAlbumDetail(id){
+    goAlbumDetail(id) {
       this.$router.push({
-        name:"",
-        params:{id:id}
-      })
+        name: "",
+        params: { id: id }
+      });
     },
-    goSingerDetail(id){
+    goSingerDetail(id) {
       this.$router.push({
-        name:'singerdetail',
-        params:{id:id}
-      })
-      this.$store.commit("changeMusicDetailCardState")
+        name: "singerdetail",
+        params: { id: id }
+      });
+      this.$store.commit("changeMusicDetailCardState");
     }
   },
   watch: {
@@ -289,6 +292,13 @@ export default {
             .musicName {
               font-size: 30px;
               color: rgb(22, 22, 22);
+            }
+            .album {
+              margin-top: 10px;
+            }
+            .singer {
+              margin-top: 10px;
+              cursor: pointer;
             }
           }
         }
