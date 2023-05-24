@@ -6,7 +6,7 @@
         通过改变界面到底部的距离  实现显示和隐藏 需要获取音乐详情 歌词  
   -->
   <div class="musicDetailCard" :class="[isMusicDetailCardShow ? '' : 'hide']">
-    <img class="bg-blur" :src="musicInfo.al.picUrl" alt v-if="musicInfo.al" />
+    <!-- <img class="bg-blur" :src="musicInfo.al.picUrl" alt v-if="musicInfo.al" /> -->
     <div class="closeCard" @click="colseCard">
       <i class="iconfont icon-arrow-down-bold"></i>
     </div>
@@ -44,8 +44,8 @@
           <div class="right">
             <div class="title">
               <div class="musicName">{{ musicInfo.name }}</div>
-              <div class="album">{{ musicInfo.al.name }}</div>
-              <div class="singer">{{ musicInfo.ar[0].name }}</div>
+              <div class="album" @click="goAlbumDetail(musicInfo.al.id)">{{ musicInfo.al.name }}</div>
+              <div class="singer" @click="goSingerDetail(musicInfo.ar[0].id)">{{ musicInfo.ar[0].name }}</div>
             </div>
             <!-- 歌词 -->
             <LyricsScroll :lyric="lyric"></LyricsScroll>
@@ -134,6 +134,19 @@ export default {
       console.log(res);
       this.comment = res.data;
       this.isCommentLoading = false
+    },
+    goAlbumDetail(id){
+      this.$router.push({
+        name:"",
+        params:{id:id}
+      })
+    },
+    goSingerDetail(id){
+      this.$router.push({
+        name:'singerdetail',
+        params:{id:id}
+      })
+      this.$store.commit("changeMusicDetailCardState")
     }
   },
   watch: {

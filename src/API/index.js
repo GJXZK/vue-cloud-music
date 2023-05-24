@@ -31,10 +31,40 @@ export function getSearch(keyword){
 export function getLyric(id){
     return request(`/lyric?id=${id}`)
 }
-// 获取歌曲评论
+// 获取歌曲最近评论
 export function getMusicComments(id){
     return request(`/comment/music?id=${id}&limit=10`)
 }
+// 获取歌曲热评
+export function getMusicHotComments(id){
+    return request(`/comment/hot?id=${id}&type=0`)
+}
+
+
+// 歌手
+// 获取歌手详情
+export function getSingerDetail(id){
+    return request(`/artist/detail?id=${id}`)
+}
+// 获取歌手热门50首歌
+export function getSingerTopSongs(id){
+    return request(`/artist/top/song?id=${id}`)
+}
+// 获取歌手的专辑
+export function getSingerAlbum(id){
+    return request(`/artist/album?id=${id}`)
+}
+// 获取歌手MV
+export function getSingerMV(id){
+    return request(`/artist/mv?id=${id}`)
+}
+
+// 专辑
+// 获取专辑内容
+export function getAlbumDetail(id){
+    return request(`/album?id=${id}`)
+}
+
 // 歌单
 // 获取歌单详情
 export function getMusicListDetailById(id){

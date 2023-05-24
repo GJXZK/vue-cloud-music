@@ -9,8 +9,8 @@
       <!-- 内容 -->
       <div class="matchContent">
         <!-- 图片 info -->
-        <div class="matchResult" v-for="(item,index) in multiMatch.artist" :key="index">
-          <div class="matchCover">
+        <div class="matchResult" v-for="(item,index) in multiMatch.artist" :key="index" @click="toSingerDetail(item.id)" >
+          <div class="matchCover" >
             <img :src="item.img1v1Url+'?param==100y100'" alt />
           </div>
           <div class="matchName">歌手：{{ item.name }}</div>
@@ -103,6 +103,12 @@ export default {
         musicList,
         musicListId: this.$store.state.musicListId
       });
+    },
+    toSingerDetail(id){
+      this.$router.push({
+        name:'singerdetail',
+        params:{id:id}
+      })
     }
   },
   watch: {
