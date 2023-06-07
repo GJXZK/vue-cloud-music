@@ -61,6 +61,16 @@
           element-loading-background="rgba(255, 255, 255, 0.1)"
         >
           <comment
+            :comments="hotComments.hotComments"
+            :commentType="'music'"
+            :commentId="$store.state.musicId + ''"
+            :musicTitle="musicInfo.name"
+            @getComment="getMusicComment($store.state.musicId)"
+            class="commentComponent"
+          >
+            <div slot="title">热门评论({{ hotComments.total }})</div>
+          </comment>
+          <comment
             :comments="comment.comments"
             :commentType="'music'"
             :commentId="$store.state.musicId + ''"
@@ -68,7 +78,7 @@
             @getComment="getMusicComment($store.state.musicId)"
             class="commentComponent"
           >
-            <div slot="title">最新评论({{ comment.total }})</div>
+            <div slot="title">最新评论</div>
           </comment>
         </div>
         <!-- <go-top scrollObj=".musicDetailCardContainer"></go-top> -->
@@ -79,7 +89,7 @@
 </template>
 
 <script>
-import { getLyric, getMusicComments } from "@/API/index";
+import { getLyric, getMusicComments,getMusicHotComments } from "@/API/index";
 import LyricsScroll from "@/components/lyricsScroll/LyricsScroll";
 import Comment from "@/components/comment/Comment.vue";
 export default {
@@ -93,7 +103,8 @@ export default {
       lyric: [[0, "正在加载歌词"]],
       isCommentLoading: true,
       currentCommentPage: 1,
-      comment: {}
+      comment: {},
+      hotComments:{},
     };
   },
   components: { LyricsScroll, Comment },
@@ -134,7 +145,8 @@ export default {
     },
     async getMusicComment(id) {
       let res = await getMusicComments(id);
-      console.log(res);
+      let hres = await getMusicHotComments(id);
+      this.hotComments = hres.data
       this.comment = res.data;
       this.isCommentLoading = false;
     },

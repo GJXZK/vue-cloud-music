@@ -201,51 +201,51 @@ export default {
       this.floorCommentInputLength = 0;
     },
     // 点击喜欢该评论的回调
-    async likeCurrentComment(flag, cid) {
-      console.log(flag, cid);
-      // 判断是否登录
-      if (!this.$store.state.isLogin) {
-        this.$message.warning("只有登陆后才能点赞哦!");
-        return;
-      }
+    // async likeCurrentComment(flag, cid) {
+    //   console.log(flag, cid);
+    //   // 判断是否登录
+    //   if (!this.$store.state.isLogin) {
+    //     this.$message.warning("只有登陆后才能点赞哦!");
+    //     return;
+    //   }
 
-      // 获取时间戳
-      var timestamp = Date.parse(new Date());
+    //   // 获取时间戳
+    //   var timestamp = Date.parse(new Date());
 
-      // 判断评论的类型
-      let type;
-      switch (this.commentType) {
-        case "album":
-          type = 3;
-          break;
-        case "musicList":
-          type = 2;
-          break;
-        case "music":
-          type = 0;
-          break;
-        case "mv":
-          type = 1;
-          break;
-        case "video":
-          type = 5;
-          break;
-      }
+    //   // 判断评论的类型
+    //   let type;
+    //   switch (this.commentType) {
+    //     case "album":
+    //       type = 3;
+    //       break;
+    //     case "musicList":
+    //       type = 2;
+    //       break;
+    //     case "music":
+    //       type = 0;
+    //       break;
+    //     case "mv":
+    //       type = 1;
+    //       break;
+    //     case "video":
+    //       type = 5;
+    //       break;
+    //   }
 
-      let res = await this.$request("/comment/like", {
-        id: this.commentId,
-        cid,
-        t: flag ? 0 : 1,
-        type,
-        timestamp
-      });
-      console.log(res);
-      if (res.data.code == 200) {
-        this.$emit("getComment");
-      } else {
-        this.$message.error("点赞失败,请稍后重试!");
-      }
-    },
+    //   let res = await this.$request("/comment/like", {
+    //     id: this.commentId,
+    //     cid,
+    //     t: flag ? 0 : 1,
+    //     type,
+    //     timestamp
+    //   });
+    //   console.log(res);
+    //   if (res.data.code == 200) {
+    //     this.$emit("getComment");
+    //   } else {
+    //     this.$message.error("点赞失败,请稍后重试!");
+    //   }
+    // },
 
     // 点击楼层评论的回调
     // commentId是评论id  nickName是评论作者
