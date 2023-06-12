@@ -18,6 +18,7 @@ const SearchVideo = () => import("@/views/search/SearchChildren/SearchVideo");
 const SearchSinger = () => import("@/views/search/SearchChildren/SearchSinger");
 const MusicListDetail = () => import("@/views/musiclist/MusicListDetail");
 const SingerDetail = () => import("@/views/singerdetail/SingerDetail");
+const VideoDetail = () => import("@/views/videodetail/VideoDetail");
 
 Vue.use(VueRouter);
 // 默认路径打开Index
@@ -101,6 +102,11 @@ const routes = [
         path:'/singerdetail/:id',
         name:'singerdetail',
         component:SingerDetail
+      },
+      {
+        path:'/videoDetail/:id',
+        name:'videoDetail',
+        component:VideoDetail
       },
     ],
   },

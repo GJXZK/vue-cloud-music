@@ -83,6 +83,8 @@ export default {
     },
 
     clickCell() {},
+
+    
     async clickRow(row) {
       // 这里双击应该是要把当前双击的歌曲插入到当前的歌单中
       // 首先获取当前的歌单列表和歌曲索引

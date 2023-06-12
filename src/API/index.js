@@ -25,7 +25,7 @@ export function getMultimatch(keyword){
 }
 // 搜索歌曲  /cloudsearch?keywords=海阔天空
 export function getSearch(keyword,type){
-    return  request(`/cloudsearch?keywords=${keyword}$type=${type}}`)
+    return  request(`/cloudsearch?keywords=${keyword}&type=${type}`)
 }
 // 搜索歌手 
 // 获取歌词

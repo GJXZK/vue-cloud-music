@@ -24,11 +24,12 @@
                   ? officialListDetailItem.topSongs
                   : officialListDetailItem.topSongs.slice(0, 10)))"
             :key="index"
-            @click="handleRowClick"
+           
             @dblclick="
                 handleRowDbClick(item, index)
               "
           >
+          <!-- @click="handleRowClick" -->
             <td class="index">{{ index + 1 }}</td>
             <td class="musicName">{{ item.name }}</td>
             <td class="singer">{{ item.ar[0].name }}</td>
@@ -84,22 +85,20 @@ export default {
   },
   methods: {
     // 点击行的回调 （选中）
-    handleRowClick(event) {
-      // 点击时，事件对象可能是td或tr，这里做下判断
-      let path;
-      if (event.path[0].localName == "tr") {
-        path = event.path[0];
-      } else {
-        path = event.path[1];
-      }
-      this.$emit("handleRowClick", path);
-    },
+    // handleRowClick(event) {
+    //   // 点击时，事件对象可能是td或tr，这里做下判断
+    //   let path;
+    //   if (event.path[0].localName == "tr") {
+    //     path = event.path[0];
+    //   } else {
+    //     path = event.path[1];
+    //   }
+    //   this.$emit("handleRowClick", path);
+    // },
     // 双击行的回调 播放
     // id 为当前歌单的id index为双击歌曲在歌单的索引
-    handleRowDbClick(item, index) {
-      console.log(item);
-      let listId = this.listId;
-      this.$emit("handleRowDbClick", { item, index, listId });
+    handleRowDbClick(item) {
+      this.$emit("handleRowDbClick", {item});
     },
     // 点击查看全部的回调
     // 这里传来的id是用于Rangking的

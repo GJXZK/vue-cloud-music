@@ -129,7 +129,10 @@ export default {
 
     clickTab() {},
     // isCheckAllShow() {},
+
+
     handleRowDbClick(item) {
+      item = item.item
       // 这里双击应该是要把当前双击的歌曲插入到当前的歌单中
       // 首先获取当前的歌单列表和歌曲索引
       let musicList = this.$store.state.musicList;
@@ -144,12 +147,14 @@ export default {
       this.$store.commit("updataPlayState", false);
       // 将请求到的歌曲详情插入到歌单对应位置并提交至vuex
       musicList.splice(currentIndex + 1, 0, item);
+      console.log(item.id);
       this.$store.commit("updataMusicId", item.id);
       this.$store.commit("updataMusicList", {
         musicList,
         musicListId: this.$store.state.musicListId
       });
     },
+
     clickCheckAll() {},
     handleRowClick() {},
     allTopSongs() {
