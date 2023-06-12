@@ -60,6 +60,15 @@ export function getSingerMV(id){
     return request(`/artist/mv?id=${id}`)
 }
 
+// 获取MV详情
+export function getMVDetail(id){
+    return request(`/mv/detail?mvid=${id}`)
+}
+
+// 获取MV url /mv/url?id=10896407&r=1080
+export function getMVUrl(id){
+    return request(`/mv/url?id=${id}&r=1080`)
+}
 // 专辑
 // 获取专辑内容
 export function getAlbumDetail(id){
