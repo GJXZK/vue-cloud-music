@@ -14,18 +14,23 @@ export default {
     return {
       // 死数据  在搜索一次后 在搜索无法转变为新搜索的内容 是路由参数无法转变 bug
       navBarData: [
-        { name: "单曲", path: `/search/searchsong/${this.$route.params.keyword}` },
-        { name: "歌手", path: `/search/searchsinger/${this.$route.params.keyword}`},
-        { name: "歌单", path: `/search/searchmusiclist/${this.$route.params.keyword}`},
-        { name: "视频", path: `/search/searchvideo/${this.$route.params.keyword}` },
-        { name: "专辑", path: `/search/searchalbum/${this.$route.params.keyword}` }
+        { name: "单曲", path: `mysearch-song` },
+        { name: "歌手", path: `mysearch-singer`},
+        { name: "歌单", path: `mysearch-musiclist`},
+        { name: "视频", path: `mysearch-video` },
+        { name: "专辑", path: `mysearch-album` }
       ]
     };
   },
   methods: {
-    clickBarItem(path) {
-      if (path != this.$route.path) {
-        this.$router.push(path);
+    clickBarItem(NewPath) {
+      if (NewPath != this.$route.name) {
+        this.$router.push({
+          name:NewPath,
+          params:{
+            keyword:this.$store.state.searchKeyword
+          }
+        });
       }
     }
   }

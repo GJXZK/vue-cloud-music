@@ -30,13 +30,13 @@ export default {
         this.activeNum = index;
       }
     });
+    this.activeNum = 0;
   },
   methods: {
     clickBarItem(path, index) {
       if (this.activeNum == index) {
         return;
       }
-      // console.log(path);
       this.activeNum = index;
       this.$emit("clickBarItem", path);
     }

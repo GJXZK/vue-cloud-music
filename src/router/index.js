@@ -60,29 +60,34 @@ const routes = [
         component: Recommendmusic,
       },
       {
-        path: "/search/:keyword",
+        path: "/search",
         name: "mysearch",
         component: Search,
         redirect: "/search/searchsong/:keyword",
         children: [
           {
             path: "/search/searchvideo/:keyword",
+            name: "mysearch-video",
             component: SearchVideo,
           },
           {
             path: "/search/searchalbum/:keyword",
+            name:"mysearch-album",
             component: SearchAlbum,
           },
           {
             path: "/search/searchsong/:keyword",
+            name:"mysearch-song",
             component: SearchSong,
           },
           {
             path: "/search/searchmusiclist/:keyword",
+            name:"mysearch-musiclist",
             component: SearchMusicList,
           },
           {
             path: "/search/searchsinger/:keyword",
+            name:"mysearch-singer",
             component: SearchSinger,
           },
         ],

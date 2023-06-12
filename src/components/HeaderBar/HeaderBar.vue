@@ -146,9 +146,6 @@ export default {
       this.$router.push({
         name:'mysearch',
         params:{keyword:this.searchKeyWord},
-        // query:{
-        //   keyword:this.searchKeyWord
-        // }
       })
     }
   },

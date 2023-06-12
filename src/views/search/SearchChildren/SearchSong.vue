@@ -58,11 +58,11 @@ export default {
   },
   methods: {
     async getMultimatch() {
-      const res = await getMultimatch(this.$route.params.keyword);
+      const res = await getMultimatch(this.$store.state.searchKeyword);
       this.multiMatch = res.data.result;
     },
     async getSearch() {
-      const res = await getSearch(this.$route.params.keyword);
+      const res = await getSearch(this.$store.state.searchKeyword,1);
       this.searchSongList = res.data.result.songs;
       this.songCount = res.data.result.songCount;
       this.searchSongList.forEach((item,index)=>{
