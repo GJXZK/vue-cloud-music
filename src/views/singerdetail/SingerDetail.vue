@@ -18,7 +18,7 @@
     <div class="container">
       <el-tabs value="first" @tab-click="clickTab">
         <el-tab-pane label="专辑" name="first">
-          <div class="topSongs" v-if="singerTopSongs.songs">
+          <div class="topSongs" v-if="singerTopSongs">
             <!-- 热门50首没有id，将歌手id作为listid -->
             <list-table
               :officialListDetailItem="singerTopSongs"
@@ -109,8 +109,8 @@ export default {
       const res = await getSingerTopSongs(id);
       console.log("歌手热门歌曲");
       console.log(res);
-      let topSongs = res.data
-      this.singerTopSongs = {topSongs,isOpen:false};
+      let topSongs = res.data.songs;
+      this.singerTopSongs = { topSongs, isOpen: false };
     },
     // 获取歌手专辑
     async getSingerAlbum(id) {
@@ -129,8 +129,26 @@ export default {
 
     clickTab() {},
     // isCheckAllShow() {},
-    handleRowDbClick() {
-
+    handleRowDbClick(item) {
+      // 这里双击应该是要把当前双击的歌曲插入到当前的歌单中
+      // 首先获取当前的歌单列表和歌曲索引
+      let musicList = this.$store.state.musicList;
+      let currentIndex = this.$store.state.currentIndex;
+      // 先判断该歌曲是否已经在歌单中存在，避免重复点击导致歌单出现相同歌曲
+      let isExist = musicList.find(item => item.id == item.id);
+      if (isExist) {
+        // 如果已经存在 则只提交歌曲id并return出去
+        this.$store.commit("updataMusicId", item.id);
+        return;
+      }
+      this.$store.commit("updataPlayState", false);
+      // 将请求到的歌曲详情插入到歌单对应位置并提交至vuex
+      musicList.splice(currentIndex + 1, 0, item);
+      this.$store.commit("updataMusicId", item.id);
+      this.$store.commit("updataMusicList", {
+        musicList,
+        musicListId: this.$store.state.musicListId
+      });
     },
     clickCheckAll() {},
     handleRowClick() {},

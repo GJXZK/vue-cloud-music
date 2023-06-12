@@ -22,12 +22,11 @@
               (officialListDetailItem.topSongs &&
                 (officialListDetailItem.isOpen
                   ? officialListDetailItem.topSongs
-                  : officialListDetailItem.topSongs.slice(0, 10))) ||
-              officialListDetailItem.songs.slice(0, 10)"
+                  : officialListDetailItem.topSongs.slice(0, 10)))"
             :key="index"
             @click="handleRowClick"
             @dblclick="
-                handleRowDbClick(officialListDetailItem.id || item.id, index)
+                handleRowDbClick(item, index)
               "
           >
             <td class="index">{{ index + 1 }}</td>
@@ -97,9 +96,10 @@ export default {
     },
     // 双击行的回调 播放
     // id 为当前歌单的id index为双击歌曲在歌单的索引
-    handleRowDbClick(id, index) {
+    handleRowDbClick(item, index) {
+      console.log(item);
       let listId = this.listId;
-      this.$emit("handleRowDbClick", { id, index, listId });
+      this.$emit("handleRowDbClick", { item, index, listId });
     },
     // 点击查看全部的回调
     // 这里传来的id是用于Rangking的
