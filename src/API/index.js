@@ -69,6 +69,10 @@ export function getMVDetail(id){
 export function getMVUrl(id){
     return request(`/mv/url?id=${id}&r=1080`)
 }
+// 获取MV评论
+export function getMVComments(id){
+    return request(`/comment/mv?id=${id}`)
+}
 // 专辑
 // 获取专辑内容
 export function getAlbumDetail(id){
