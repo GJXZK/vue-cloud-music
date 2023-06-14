@@ -22,6 +22,7 @@ const MVDetail = () => import("@/views/MVdetail/MVDetail");
 const VideoDetail = () => import("@/views/videodetail/videoDetail");
 
 Vue.use(VueRouter);
+
 // 默认路径打开Index
 const routes = [
   { path: "/", redirect: "/index" },

@@ -94,7 +94,6 @@ export default {
       this.lyricsIndex = 0;
     },
     lyric() {
-      console.log("获取了歌词");
       // 大于一秒，说明歌词在1秒后才请求成功 歌词可能不能马上跳转到当前时间 这里进行校准
       if (this.$store.state.currentTime > 1) {
         // 处理播放时间跳转时歌词位置的校准

@@ -68,7 +68,6 @@ export default {
       this.searchSongList.forEach((item,index)=>{
         this.searchSongList[index].dt = handleMusicTime(item.dt);
       })
-      console.log(this.searchSongList);
     },
 
     // 处理索引

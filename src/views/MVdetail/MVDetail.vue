@@ -72,31 +72,50 @@
     <!-- 推荐视频的盒子 -->
     <div class="recommend-box">
       <h2>相关推荐</h2>
+      <!-- 推荐的视频 -->
+      <div class="misiItem" v-for="(item) in MVmisi" :key="item.id" @click="gotoMV(item.id)">
+        <div class="item-img">
+          <img :src="item.cover" alt="">
+          <div class="playcount">
+            <i class="iconfont icon-shipin"></i>
+            <p>{{ changeNum(item.playCount) }}</p>
+          </div>
+          <div class="duration">
+            <p>{{ changeTime(item.duration) }}</p>
+          </div>
+        </div>
+        <div class="item-detail">
+          {{ item.name }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { handleNum } from "@/plugins/utils";
-import { getMVDetail, getMVUrl,getMVComments,getMusicHotComments } from "../../API";
+import { handleNum , handleMusicTime} from "@/plugins/utils";
+import { getMVDetail, getMVUrl,getMVComments,getMusicHotComments,getMVsimi } from "../../API";
 import comment from "@/components/comment/Comment.vue";
 export default {
   data() {
     return {
-      mvDetail: {},
+      mvDetail: {
+        artists:[{img1v1Url:''}]
+      },
       mvUrl: "",
       loading: false,
       isCommentLoading:true,
       hotComments: {},
       comment:{},
-      
+      MVmisi:[]
     };
   },
   created() {
     console.log(this.$route.params.id);
     this.getMVDetail();
     this.getMVUrl();
-    this.getMVComments()
+    this.getMVComments();
+    this.getMVSimi();
   },
   components:{comment},
   methods: {
@@ -112,9 +131,13 @@ export default {
       const res = await getMVUrl(this.$route.params.id);
       console.log(res);
       this.mvUrl = res.data.data.url;
+      this.$store.commit("updataPlayState", false);
     },
     changeNum(num) {
       return handleNum(num);
+    },
+    changeTime(time){
+      return handleMusicTime(time);
     },
     async getMVComments() {
       const res = await getMVComments(this.$route.params.id);
@@ -125,6 +148,14 @@ export default {
       if(res.data.code == 200){
         this.isCommentLoading=false
       }
+    },
+    async getMVSimi() {
+      const res = await getMVsimi(this.$route.params.id);
+      console.log(res);
+      this.MVmisi = res.data.mvs;
+    },
+    gotoMV(id) {
+      this.$router.push({ name: "MVDetail", params: { id} });
     }
   }
 };
@@ -184,9 +215,39 @@ export default {
   .recommend-box {
     width: 30%;
     height: 1000px;
-    background-color: #ccc;
     h2 {
       margin: 15px 0;
+    }
+    .misiItem{
+      display: flex;
+      width: 80%;
+      .item-img{
+        margin:5px 0;
+        width: 180px;
+        height: 100px;
+        border-radius: 20px;
+        overflow: hidden;
+        position: relative;
+        img{
+          width: 120%;
+        }
+        .playcount{
+          position: absolute;
+          color: aliceblue;
+          font-size: 15px;
+          top: 0px;
+          right: 10px;
+          display: flex;
+          align-items: center;
+          padding: 5px;
+        }
+        .duration{
+          position: absolute;
+          top: 80px;
+          right: 10px;
+          color: #fff;
+        }
+      }
     }
   }
 }

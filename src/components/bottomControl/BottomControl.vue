@@ -297,6 +297,13 @@ export default {
       this.getMusicDetailFromMusicList()
       this.getMusicDetail(id);
       this.playMusic();
+    },
+    "$store.state.playState"(playstate){
+      if(playstate == false){
+        this.pauseMusic();
+      }else if(playstate == true){
+        this.playMusic();
+      }
     }
   },
   filters: {

@@ -73,6 +73,10 @@ export function getMVUrl(id){
 export function getMVComments(id){
     return request(`/comment/mv?id=${id}`)
 }
+// 获取相似MV /simi/mv?mvid=5436712
+export function getMVsimi(id){
+    return request(`/simi/mv?mvid=${id}`)
+}
 
 // 获取视频详情 
 export function getVideoDetail(id){
@@ -85,6 +89,10 @@ export function getVideoUrl(id){
 // 获取视频评论 /comment/video?id=89ADDE33C0AAE8EC14B99F6750DB954D
 export function getVideoComments(id){
     return request(`/comment/video?id=${id}`)
+}
+// 获取相关视频  
+export function getVideoRelated(id){
+    return request(`/related/allvideo?id=${id}`)
 }
 
 // 专辑

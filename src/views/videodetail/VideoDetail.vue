@@ -41,8 +41,10 @@
         <!-- 发布时间 -->
         <div class="publish">
           <p>发布时间 {{ changeDate(mvDetail.publishTime) }}</p>
-          <p class="playCount">播放量 {{ changeNum(mvDetail.praisedCount
-) }}</p>
+          <p class="playCount">
+            播放量 {{ changeNum(mvDetail.praisedCount
+            ) }}
+          </p>
         </div>
       </div>
       <div
@@ -73,51 +75,65 @@
     <!-- 推荐视频的盒子 -->
     <div class="recommend-box">
       <h2>相关推荐</h2>
+      <div class="misiItem" v-for="(item) in Relatedvideos" :key="item.id" @click="gotoMV(item.id)">
+        <div class="item-img">
+          <img :src="item.coverUrl" alt />
+          <div class="playcount">
+            <i class="iconfont icon-shipin"></i>
+            <p>{{ changeNum(item.playTime) }}</p>
+          </div>
+          <div class="duration">
+            <p>{{ changeTime(item.durationms) }}</p>
+          </div>
+        </div>
+        <div class="item-detail">{{ item.title   }}</div>
+      </div>
     </div>
   </div>
 </template>
   
 <script>
-import { handleNum,formatDate } from "@/plugins/utils";
+import { handleNum, formatDate,handleMusicTime } from "@/plugins/utils";
 import {
   getVideoDetail,
   getVideoUrl,
   getVideoComments,
-  getMusicHotComments
+  getMusicHotComments,
+  getVideoRelated
 } from "../../API";
 import comment from "@/components/comment/Comment.vue";
 export default {
   data() {
     return {
       mvDetail: {
-        creator:{
-            avatarUrl: ""
+        creator: {
+          avatarUrl: ""
         }
       },
       mvUrl: "",
       loading: false,
       isCommentLoading: true,
       hotComments: {},
-      comment: {}
+      comment: {},
+      Relatedvideos: []
     };
   },
   created() {
-    console.log(this.$route.params.id);
     this.getMVDetail();
     this.getMVUrl();
     this.getMVComments();
+    this.getVideoRelated();
   },
   components: { comment },
   methods: {
     async getMVDetail() {
       const res = await getVideoDetail(this.$route.params.id);
-      console.log(res);
       this.mvDetail = res.data.data;
     },
     async getMVUrl() {
       const res = await getVideoUrl(this.$route.params.id);
-      console.log(res);
       this.mvUrl = res.data.urls[0].url;
+      this.$store.commit("updataPlayState", false);
     },
     changeNum(num) {
       return handleNum(num);
@@ -132,13 +148,19 @@ export default {
     async getMVComments() {
       const res = await getVideoComments(this.$route.params.id);
       const hres = await getMusicHotComments(this.$route.params.id, 5);
-      console.log(res.data);
       this.hotComments = hres.data;
       this.comment = res.data;
       if (res.data.code == 200) {
         this.isCommentLoading = false;
       }
-    }
+    },
+    async getVideoRelated() {
+      const res = await getVideoRelated(this.$route.params.id);
+      this.Relatedvideos = res.data.data;
+    },
+    changeTime(time){
+      return handleMusicTime(time);
+    },
   }
 };
 </script>
@@ -197,9 +219,39 @@ export default {
   .recommend-box {
     width: 30%;
     height: 1000px;
-    background-color: #ccc;
     h2 {
       margin: 15px 0;
+    }
+    .misiItem {
+      display: flex;
+      width: 80%;
+      .item-img {
+        margin: 5px 0;
+        width: 180px;
+        height: 100px;
+        border-radius: 20px;
+        overflow: hidden;
+        position: relative;
+        img {
+          width: 120%;
+        }
+        .playcount {
+          position: absolute;
+          color: aliceblue;
+          font-size: 15px;
+          top: 0px;
+          right: 10px;
+          display: flex;
+          align-items: center;
+          padding: 5px;
+        }
+        .duration {
+          position: absolute;
+          top: 80px;
+          right: 10px;
+          color: #fff;
+        }
+      }
     }
   }
 }
