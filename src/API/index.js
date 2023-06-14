@@ -36,9 +36,9 @@ export function getLyric(id){
 export function getMusicComments(id){
     return request(`/comment/music?id=${id}&limit=10`)
 }
-// 获取歌曲热评
-export function getMusicHotComments(id){
-    return request(`/comment/hot?id=${id}&type=0`)
+// 获取歌曲热评  需要传入两个参数 id 类型0: 歌曲 1: mv 2: 歌单 3: 专辑 4: 电台节目 5: 视频 6: 动态 7: 电台
+export function getMusicHotComments(id,type){
+    return request(`/comment/hot?id=${id}&type=${type}`)
 }
 
 
@@ -73,6 +73,20 @@ export function getMVUrl(id){
 export function getMVComments(id){
     return request(`/comment/mv?id=${id}`)
 }
+
+// 获取视频详情 
+export function getVideoDetail(id){
+    return request(`/video/detail?id=${id}`)
+}
+// 获取视频链接
+export function getVideoUrl(id){
+    return request(`/video/url?id=${id}`)
+}
+// 获取视频评论 /comment/video?id=89ADDE33C0AAE8EC14B99F6750DB954D
+export function getVideoComments(id){
+    return request(`/comment/video?id=${id}`)
+}
+
 // 专辑
 // 获取专辑内容
 export function getAlbumDetail(id){

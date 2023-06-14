@@ -145,7 +145,7 @@ export default {
     },
     async getMusicComment(id) {
       let res = await getMusicComments(id);
-      let hres = await getMusicHotComments(id);
+      let hres = await getMusicHotComments(id,0);
       this.hotComments = hres.data
       this.comment = res.data;
       this.isCommentLoading = false;

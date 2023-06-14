@@ -61,7 +61,7 @@ export default {
       console.log(id);
       console.log(type);
       if (type == 0) {
-        this.$router.push({ name: "videoDetail", params: { id, type: "mv" } });
+        this.$router.push({ name: "MVDetail", params: { id, type: "mv" } });
       } else {
         this.$router.push({
           name: "videoDetail",
