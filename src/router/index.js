@@ -19,7 +19,7 @@ const SearchSinger = () => import("@/views/search/SearchChildren/SearchSinger");
 const MusicListDetail = () => import("@/views/musiclist/MusicListDetail");
 const SingerDetail = () => import("@/views/singerdetail/SingerDetail");
 const MVDetail = () => import("@/views/MVdetail/MVDetail");
-const VideoDetail = () => import("@/views/videodetail/videoDetail");
+// const VideoDetail = () => import("@/views/videodetail/videoDetail");
 
 Vue.use(VueRouter);
 
@@ -110,11 +110,11 @@ const routes = [
         name:'MVDetail',
         component:MVDetail
       },
-      {
-        path:'/videoDetail/:id',
-        name:'videoDetail',
-        component:VideoDetail
-      },
+      // {
+      //   path:'/videoDetail/:id',
+      //   name:'videoDetail',
+      //   component:VideoDetail
+      // },
     ],
   },
 ];
