@@ -30,7 +30,7 @@
             <span slot="title">视频</span>
           </el-menu-item>
           <!-- 收藏 -->
-          <el-menu-item index="/">
+          <el-menu-item index="/collect">
             <i class="iconfont icon-more"></i>
             <span slot="title">收藏</span>
           </el-menu-item>
@@ -40,6 +40,9 @@
             <span slot="title">每日推荐</span>
           </el-menu-item>
         </el-menu>
+        <el-menu-item-group>
+          
+        </el-menu-item-group>
       </el-aside>
       <el-main>
         <router-view></router-view>

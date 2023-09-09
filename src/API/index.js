@@ -108,6 +108,15 @@ export function getMusicListDetailById(id){
     // return request(`/playlist/detail?id=${id}&timestamp=${timestamp}`)
     return request(`/playlist/detail?id=${id}`)
 }
+// 获取歌单评论
 export function getMusicListComment(id,page){
     return request(`/comment/playlist?id=${id}&limit=50&offset=${(page-1)*50}`)
+}
+
+// 获取用户的歌单列表
+// /user/playlist?uid=32953014
+export async function getUserPlayList(){
+    let id = window.localStorage.getItem('userId')
+    const resp = await request(`/user/playlist?uid=${id}`)
+    return resp.data
 }
