@@ -326,7 +326,7 @@ export default {
   z-index: 10000;
 
   .left {
-    width: 200px;
+    width: 300px;
     height: 100%;
     display: flex;
     align-items: center;
@@ -348,7 +348,7 @@ export default {
       width: 80px;
       .musicName {
         margin-bottom: 4px;
-        width: 100%;
+        width: 200%;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;

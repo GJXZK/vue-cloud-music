@@ -8,11 +8,11 @@ const MusicList = () => import("@/views/discover/discoverChildren/Musiclist");
 const Ranking = () => import("@/views/discover/discoverChildren/Ranking");
 const Singer = () => import("@/views/discover/discoverChildren/Singer");
 const Video = () => import("@/views/video/Video");
+const Collect = () => import("@/views/collect/collect.vue")
 const Recommendmusic = () => import("@/views/recommendmusic/Recommendmusic");
 const Search = () => import("@/views/search/Search");
 const SearchSong = () => import("@/views/search/SearchChildren/SearchSong");
-const SearchMusicList = () =>
-  import("@/views/search/SearchChildren/SearchMusicList");
+const SearchMusicList = () => import("@/views/search/SearchChildren/SearchMusicList");
 const SearchAlbum = () => import("@/views/search/SearchChildren/SearchAlbum");
 const SearchVideo = () => import("@/views/search/SearchChildren/SearchVideo");
 const SearchSinger = () => import("@/views/search/SearchChildren/SearchSinger");
@@ -57,6 +57,10 @@ const routes = [
       {
         path: "/video",
         component: Video,
+      },
+      {
+        path:'/collect',
+        component:Collect
       },
       {
         path: "/recommendmusic",

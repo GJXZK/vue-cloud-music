@@ -77,7 +77,7 @@
 import BottomControl from "@/components/bottomControl/BottomControl";
 import HeaderBar from "@/components/HeaderBar/HeaderBar";
 import MusicDetailCard from "@/views/musicDetailCard/MusicDetailCard.vue";
-import { getUserPlayListById } from "@/API/index";
+import { getUserPlayListById } from "@/API/userApi";
 export default {
   name: "MyIndex",
   components: {
