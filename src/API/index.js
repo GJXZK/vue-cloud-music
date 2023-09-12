@@ -115,8 +115,8 @@ export function getMusicListComment(id,page){
 
 // 获取用户的歌单列表
 // /user/playlist?uid=32953014
-export async function getUserPlayList(){
+export async function getUserPlayListById(){
     let id = window.localStorage.getItem('userId')
     const resp = await request(`/user/playlist?uid=${id}`)
-    return resp.data
+    return resp
 }

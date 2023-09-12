@@ -244,7 +244,16 @@ export default {
       // 2、将date进行格式化
       return formatDate(date, "yyyy-MM-dd");
     }
-  }
+  },
+  watch: {
+	// 监听路由是否变化
+	'$route' (to, from) { 
+		if(to.params.id != from.params.id){
+      this.getMusicListDetail();
+      this.getMusicListComments();
+		}
+	}
+},
 };
 </script>
 
