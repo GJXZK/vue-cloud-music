@@ -102,7 +102,11 @@ export default {
     },
   },
   mounted(){
-    this.getUserPlaylist();
+    let userId = window.localStorage.getItem('userId')
+    if(userId){
+      this.getUserPlaylist();
+    }
+    
   },
   watch: {
     "$store.state.isLogin"(state) {
@@ -117,7 +121,7 @@ export default {
 
 <style>
 .el-header {
-  background-color: #ec4141;
+  background-color: #c61216;
   height: 70px !important;
   padding: 0;
   margin: 0;

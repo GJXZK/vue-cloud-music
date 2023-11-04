@@ -3,7 +3,8 @@
   <div class="headerBar">
     <!-- 头部导航栏 左侧 logo-->
     <div class="left">
-      <img src="@/assets/img/logo.png" alt />
+      <img src="@/assets/img/new_logo.png" alt />
+      <div class="left-text">Insomnia-music</div>
     </div>
     <!-- 头部导航栏 中间 上一步 下一步 搜索-->
     <div class="center">
@@ -17,7 +18,7 @@
         <van-search
           v-model="searchKeyWord"
           placeholder="请输入搜索关键词"
-          background="#ec4141"
+          background="#c61216"
           shape='round'
           @focus="SearchFocus"
           @search="onSubmit"
@@ -174,10 +175,18 @@ export default {
   position: relative;
   z-index: 30000;
   .left {
-    width: 110px;
-    margin: 0 50px 0 10px;
+    width: 200px;
+    margin: 0 40px 0 10px;
+    display: flex;
+    align-items: center;
     img {
-      width: 100%;
+      width: 30%;
+    }
+    .left-text{
+      width: 200px;
+      padding-left: 20px;
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.85);
     }
   }
   .center {
