@@ -211,7 +211,9 @@ export default {
         });
       }
     },
-    playAll() {},
+    playAll() {
+      this.clickRow(this.musicListDetail.tracks[0])
+    },
     collectList() {},
     scrollToComment() {},
     clickCell(){},
