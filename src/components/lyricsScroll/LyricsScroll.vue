@@ -9,23 +9,30 @@
       :class="lyricsIndex - 1 == index ? 'currentLyric' : ''"
       v-for="(item, index) in lyric"
       :key="index"
-    >{{ item[1] }}</div>
+    >
+      {{ item[1] }}
+    </div>
     <!-- 占位 -->
     <div class="placeholder"></div>
   </div>
 </template>
-  
-  <script>
+
+<script>
 let placeholderHeight = 0;
 export default {
   name: "LyricsScroll",
   props: {
-    lyric: {}
+    lyric: {
+      type: Array,
+      default() {
+        return []
+      },
+    },
   },
   data() {
     return {
       // 当前歌词索引
-      lyricsIndex: 0
+      lyricsIndex: 0,
     };
   },
   methods: {
@@ -46,14 +53,14 @@ export default {
         //   lyricsArr[currentLyric].scrollIntoView();
         lyrics.scrollTo({
           behavior: "smooth",
-          top: distance - placeholderHeight
+          top: distance - placeholderHeight,
         });
       }
     },
     //获取当前歌词索引
     getCurrentLyricsIndex(currentTime) {
       let lyricsIndex = 0;
-      this.lyric.some(item => {
+      this.lyric.some((item) => {
         if (lyricsIndex < this.lyric.length - 1) {
           if (currentTime > item[0]) {
             lyricsIndex += 1;
@@ -63,7 +70,7 @@ export default {
       });
       // console.log(lyricsIndex);
       this.lyricsIndex = lyricsIndex;
-    }
+    },
   },
   watch: {
     // 监听当前播放时间
@@ -90,10 +97,11 @@ export default {
       }
     },
     // 监听vuex中的musicId 重置歌词索引
-    "$store.state.musicId"() {
+    "$store.state.musicId"(musicId) {
       this.lyricsIndex = 0;
     },
-    lyric() {
+    lyric(current) {
+      console.log("获取了歌词");
       // 大于一秒，说明歌词在1秒后才请求成功 歌词可能不能马上跳转到当前时间 这里进行校准
       if (this.$store.state.currentTime > 1) {
         // 处理播放时间跳转时歌词位置的校准
@@ -105,17 +113,17 @@ export default {
           });
         }
       }
-    }
+    },
   },
   created() {},
-  mounted() {}
+  mounted() {},
 };
 </script>
-  
-  <style scoped>
+
+<style scoped>
 .lyrics {
   width: 100%;
-  height: 320px;
+  height: 275px;
   font-size: 12px;
   text-align: center;
   overflow-y: scroll;
@@ -136,7 +144,7 @@ export default {
 
 .currentLyric {
   font-weight: 600;
-  font-size: 20px;
+  font-size: 14px;
   color: black;
 }
 

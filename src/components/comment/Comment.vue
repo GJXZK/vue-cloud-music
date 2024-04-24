@@ -1,6 +1,9 @@
 <template>
   <div class="hotComments">
-    <div class="comments" v-if="commentType != '' && commentType != 'music' && isHotComment">
+    <div
+      class="comments"
+      v-if="commentType != '' && commentType != 'music' && isHotComment"
+    >
       <el-input
         type="textarea"
         class="commentArea"
@@ -16,19 +19,53 @@
           round
           @click="commentMode ? submitComment() : submitFloorComment()"
           class="submitComment"
-        >评论</el-button>
+          >评论</el-button
+        >
       </div>
     </div>
     <!-- 音乐单曲评论 -->
-    
-    <div class="commentHeader">
-      <slot name="title"></slot>
+    <div
+      class="musicComment"
+      v-else-if="commentType != '' && commentType == 'music'"
+    >
+      <el-button class="commentCardSwitch" size="mini" round @click="openDialog"
+        ><i class="iconfont icon-ziyuan"></i> 发表我的音乐评论</el-button
+      >
+      <el-dialog
+        :visible="isCommentDialogShow"
+        width="400px"
+        @close="closeCommentDialog"
+        append-to-body
+        class="commentDialog"
+      >
+        <div class="musicTitle">歌曲：{{ musicTitle }}</div>
+        <el-input
+          type="textarea"
+          class="commentArea musicCommentArea"
+          maxlength="140"
+          show-word-limit
+          v-model="commentInput"
+          @input="inputComment"
+          placeholder="留下你的评论"
+        ></el-input>
+        <!-- 提交评论 -->
+        <div class="submitCommentButton">
+          <el-button
+            size="mini"
+            round
+            @click="commentMode ? submitComment() : submitFloorComment()"
+            class="submitComment musicSubmitComment"
+            >评论</el-button
+          >
+        </div>
+      </el-dialog>
     </div>
+    <div class="commentHeader"><slot name="title"></slot></div>
     <div class="commentItem" v-for="(item, index) in comments" :key="index">
       <div class="commentCreatorAvatar">
         <img
           :src="item.user.avatarUrl + '?param=100y100'"
-          alt
+          alt=""
           @click="goToPersonal(item.user.userId)"
         />
       </div>
@@ -37,31 +74,34 @@
           <span
             class="commentUserNickName"
             @click="goToPersonal(item.user.userId)"
-          >{{ item.user.nickname }}:&nbsp;</span>
+            >{{ item.user.nickname }}:&nbsp;</span
+          >
           <span>{{ item.content }}</span>
         </div>
         <div class="replied">
-          <div class="repliedItem" v-for="(item1, index1) in item.beReplied" :key="index1">
-            <span
-              class="repliedUser"
-              @click="goToPersonal(item.user.userId)"
-            >@{{ item1.user.nickname }}:&nbsp;</span>
+          <div
+            class="repliedItem"
+            v-for="(item1, index1) in item.beReplied"
+            :key="index1"
+          >
+            <span class="repliedUser" @click="goToPersonal(item.user.userId)"
+              >@{{ item1.user.nickname }}:&nbsp;</span
+            >
             <span class="repliedContent">{{ item1.content }}</span>
           </div>
         </div>
         <div class="commentBottom">
-          <div class="commentCreatedTime">{{ item.time | showDate }}</div>
+          <div class="commentCreatedTime">
+            {{ item.time | showDate }}
+          </div>
           <div class="commentButtons">
             <div
               @click="likeCurrentComment(item.liked, item.commentId)"
               :class="item.liked ? 'likeCurrentComment' : ''"
             >
-              <i class="iconfont icon-good"></i>
-              {{ item.likedCount }}
+              <i class="iconfont icon-good"></i> {{ item.likedCount }}
             </div>
-            <div>
-              <i class="iconfont icon-zhuanfa"></i>
-            </div>
+            <div><i class="iconfont icon-zhuanfa"></i></div>
             <div>
               <i
                 class="iconfont icon-pinglun"
@@ -74,48 +114,48 @@
     </div>
   </div>
 </template>
-  
-  <script>
+
+<script>
 import { formatDate } from "@/plugins/utils";
 
 export default {
-  name: "myComment",
+  name: "Comment",
   props: {
     // 评论数据
     comments: {
       type: Array,
       default() {
         return [];
-      }
+      },
     },
     // 评论的类型
     commentType: {
       type: String,
       default() {
         return "";
-      }
+      },
     },
     // 评论对象的id
     commentId: {
       type: String,
       default() {
         return "";
-      }
+      },
     },
     // 歌曲评论需要歌曲名称
     musicTitle: {
       type: String,
       default() {
         return "";
-      }
+      },
     },
     // 是否是热门评论
     isHotComment: {
       type: Boolean,
       default() {
         return true;
-      }
-    }
+      },
+    },
   },
   data() {
     return {
@@ -127,7 +167,7 @@ export default {
       // 楼层回复前面几个字的长度
       floorCommentInputLength: 0,
       // 用于暂存楼层评论id
-      floorCommentId: ""
+      floorCommentId: "",
     };
   },
   methods: {
@@ -168,8 +208,8 @@ export default {
         t: 1,
         id: this.commentId,
         type,
-        content: this.commentInput
-      }).catch(err => {
+        content: this.commentInput,
+      }).catch((err) => {
         // console.log(err.response.data.msg);
         this.$message.error(err.response.data.msg);
       });
@@ -201,51 +241,51 @@ export default {
       this.floorCommentInputLength = 0;
     },
     // 点击喜欢该评论的回调
-    // async likeCurrentComment(flag, cid) {
-    //   console.log(flag, cid);
-    //   // 判断是否登录
-    //   if (!this.$store.state.isLogin) {
-    //     this.$message.warning("只有登陆后才能点赞哦!");
-    //     return;
-    //   }
+    async likeCurrentComment(flag, cid) {
+      console.log(flag, cid);
+      // 判断是否登录
+      if (!this.$store.state.isLogin) {
+        this.$message.warning("只有登陆后才能点赞哦!");
+        return;
+      }
 
-    //   // 获取时间戳
-    //   var timestamp = Date.parse(new Date());
+      // 获取时间戳
+      var timestamp = Date.parse(new Date());
 
-    //   // 判断评论的类型
-    //   let type;
-    //   switch (this.commentType) {
-    //     case "album":
-    //       type = 3;
-    //       break;
-    //     case "musicList":
-    //       type = 2;
-    //       break;
-    //     case "music":
-    //       type = 0;
-    //       break;
-    //     case "mv":
-    //       type = 1;
-    //       break;
-    //     case "video":
-    //       type = 5;
-    //       break;
-    //   }
+      // 判断评论的类型
+      let type;
+      switch (this.commentType) {
+        case "album":
+          type = 3;
+          break;
+        case "musicList":
+          type = 2;
+          break;
+        case "music":
+          type = 0;
+          break;
+        case "mv":
+          type = 1;
+          break;
+        case "video":
+          type = 5;
+          break;
+      }
 
-    //   let res = await this.$request("/comment/like", {
-    //     id: this.commentId,
-    //     cid,
-    //     t: flag ? 0 : 1,
-    //     type,
-    //     timestamp
-    //   });
-    //   console.log(res);
-    //   if (res.data.code == 200) {
-    //     this.$emit("getComment");
-    //   } else {
-    //     this.$message.error("点赞失败,请稍后重试!");
-    //   }
-    // },
+      let res = await this.$request("/comment/like", {
+        id: this.commentId,
+        cid,
+        t: flag ? 0 : 1,
+        type,
+        timestamp,
+      });
+      console.log(res);
+      if (res.data.code == 200) {
+        this.$emit("getComment");
+      } else {
+        this.$message.error("点赞失败,请稍后重试!");
+      }
+    },
 
     // 点击楼层评论的回调
     // commentId是评论id  nickName是评论作者
@@ -312,8 +352,8 @@ export default {
         id: this.commentId,
         type,
         content: this.commentInput,
-        commentId: this.floorCommentId
-      }).catch(err => {
+        commentId: this.floorCommentId,
+      }).catch((err) => {
         // console.log(err.response.data.msg);
         this.$message.error(err.response.data.msg);
       });
@@ -367,13 +407,13 @@ export default {
     goToPersonal(userId) {
       this.$router.push({
         name: "personal",
-        params: { uid: userId }
+        params: { uid: userId },
       });
       if (this.commentType == "music") {
         // this.$emit("closeMuiscDetailCard");
         this.$store.commit("changeMusicDetailCardState", false);
       }
-    }
+    },
   },
   filters: {
     showDate(value) {
@@ -382,23 +422,23 @@ export default {
 
       // 2、将date进行格式化
       return formatDate(date, "yyyy-MM-dd");
-    }
+    },
   },
   watch: {
     // 评论数据发生变化时 重置所有发表评论的数据
-    comments() {
+    comments(current) {
       this.commentInpt = "";
       this.isCommentDialogShow = false;
       this.commentMode = true;
       this.floorCommentInputLength = 0;
       this.floorCommentId = "";
-    }
+    },
   },
-  created() {}
+  created() {},
 };
 </script>
-  
-  <style scoped>
+
+<style scoped>
 .hotComments {
   margin-bottom: 20px;
   width: 100%;
@@ -522,7 +562,7 @@ export default {
 .commentCardSwitch {
   position: fixed;
   left: 50%;
-  top: calc(80vh - 105px);
+  top: calc(100vh - 105px);
   transform: translateX(-50%) scale(0.9);
   border: none;
   background-color: #f1f1f1;

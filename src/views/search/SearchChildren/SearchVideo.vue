@@ -24,7 +24,6 @@
 
 <script>
 import VideoListCard from "@/components/videoListCard/VideoListCard.vue";
-import { getSearch } from "@/API/index";
 
 export default {
   components: { VideoListCard },
@@ -40,8 +39,11 @@ export default {
     // 请求
     // 请求搜索专辑
     async getSearchVideo() {
-      let type = 1014;
-      const res = await getSearch(this.$store.state.searchKeyword, type);
+      let res = await this.$request("/cloudsearch", {
+        keywords: this.$route.params.id,
+        offset: 30 * (this.currentPage - 1),
+        type: 1014,
+      });
       console.log(res);
       this.videoCount = res.data.result.videoCount;
       this.searchVideoList = res.data.result.videos;
@@ -61,7 +63,7 @@ export default {
       console.log(id);
       console.log(type);
       if (type == 0) {
-        this.$router.push({ name: "MVDetail", params: { id, type: "mv" } });
+        this.$router.push({ name: "videoDetail", params: { id, type: "mv" } });
       } else {
         this.$router.push({
           name: "videoDetail",

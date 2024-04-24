@@ -1,11 +1,11 @@
-import { request } from '@/API/request';
+import { request } from '@/network/request';
 
 // 获取登录验证码
 export function getVerifyCode(query) {
   return request('/captcha/sent', query);
 }
 
-// 登录c
+// 登录
 export function login(query) {
   return request('/login/cellphone', query);
 }

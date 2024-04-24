@@ -18,19 +18,17 @@
         <div class="videoCover">
           <img
             :src="
-                (videoType == 'singerMv' ? item.imgurl : item.cover) +
-                '?param=680y400'
-              "
-            alt
+              (videoType == 'singerMv' ? item.imgurl : item.cover) +
+              '?param=680y400'
+            "
+            alt=""
           />
           <div class="playCount">
-            <i class="iconfont icon-shipin"></i>
-            {{ item.playCount | handleNum }}
+            <i class="iconfont icon-shipin"></i>{{ item.playCount | handleNum }}
           </div>
-          <div
-            class="videoTime"
-            v-if="videoType == 'singerMv'"
-          >{{ item.duration | handleMusicTime }}</div>
+          <div class="videoTime" v-if="videoType == 'singerMv'">
+            {{ item.duration | handleMusicTime }}
+          </div>
         </div>
         <div class="videoTitle">{{ item.name }}</div>
         <div class="singer" v-if="videoType == 'mv'">{{ item.artistName }}</div>
@@ -52,20 +50,25 @@
         @click="clickListCardItem(item.vid || item.data.vid, index, item.type)"
       >
         <div class="videoCover">
-          <img :src="(item.coverUrl || item.data.coverUrl) + '?param=1260y800'" alt />
+          <img
+            :src="(item.coverUrl || item.data.coverUrl) + '?param=1260y800'"
+            alt=""
+          />
           <div class="playCount">
-            <i class="iconfont icon-shipin"></i>
-            {{ (item.playTime || item.data.playTime) | handleNum }}
+            <i class="iconfont icon-shipin"></i
+            >{{ (item.playTime || item.data.playTime) | handleNum }}
           </div>
-          <div class="videoTime">{{ (item.durationms || item.data.durationms) | handleMusicTime }}</div>
+          <div class="videoTime">
+            {{ (item.durationms || item.data.durationms) | handleMusicTime }}
+          </div>
         </div>
         <div class="videoTitle">{{ item.title || item.data.title }}</div>
       </div>
     </div>
   </div>
 </template>
-  
-  <script>
+
+<script>
 import { handleMusicTime, handleNum } from "@/plugins/utils.js";
 
 export default {
@@ -73,7 +76,7 @@ export default {
   data() {
     return {
       // 无限滚动是否可用
-      disabled: true
+      disabled: true,
     };
   },
   props: {
@@ -81,21 +84,21 @@ export default {
       type: Array,
       default() {
         return [];
-      }
+      },
     },
     // 是否触底加载
     isLoad: {
       type: Boolean,
       default() {
         return false;
-      }
+      },
     },
     videoType: {
       type: String,
       default() {
         return "singerMv";
-      }
-    }
+      },
+    },
   },
   methods: {
     clickListCardItem(id, index, type) {
@@ -106,11 +109,11 @@ export default {
       this.$emit("bottomLoad");
       // 触发load后加载数据 期间不允许再次触发load事件
       this.disabled = true;
-    }
+    },
   },
   filters: {
     handleMusicTime,
-    handleNum
+    handleNum,
   },
   watch: {
     //   数据更新后，再次运行触发load事件
@@ -122,12 +125,12 @@ export default {
           this.disabled = true;
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
-  
-  <style scoped>
+
+<style scoped>
 .videoListCard {
   width: 100%;
   display: flex;
@@ -148,8 +151,8 @@ export default {
 }
 
 /* .cardItem:nth-child(4n) {
-    margin: 0;
-  } */
+  margin: 0;
+} */
 
 .videoCover {
   position: relative;

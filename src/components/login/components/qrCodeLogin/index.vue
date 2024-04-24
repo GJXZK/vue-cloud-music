@@ -58,7 +58,6 @@ export default {
     async getAccountInfo() {
       const res = await getAccountInfo();
       if (res.data.code == 200) {
-        console.log(res);
         window.localStorage.setItem('userId', res.data.profile.userId);
         this.$emit('getUserInfo', res.data.profile);
         this.$message.success('登录成功!');

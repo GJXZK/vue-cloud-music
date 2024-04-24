@@ -94,7 +94,7 @@
 let timer;
 
 export default {
-  name: "myRegistered",
+  name: "Registered",
   props: {
     isDialogShow: {
       type: Boolean,
@@ -264,6 +264,7 @@ export default {
       this.isButtonLoading = false;
       this.isCountDownShow = false;
       this.countDown = 60;
+
       this.$emit("closeRegistered");
     },
   },

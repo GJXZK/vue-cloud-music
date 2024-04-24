@@ -1,14 +1,27 @@
 <template>
-  <div class="musiclist">
-    <h1>歌单</h1>
+  <div class="musicListContainer">
+    <div class="musicList">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
-  
-  <script>
+
+<script>
 export default {
-  name: "myMusiclist"
+  name: "MusicList",
 };
 </script>
-  
-  <style>
+
+<style scoped>
+.musicListContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.musicList {
+  max-width: 1000px;
+  padding: 10px;
+  width: 100%;
+}
 </style>
