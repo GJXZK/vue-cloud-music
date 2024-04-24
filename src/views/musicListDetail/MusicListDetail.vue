@@ -85,7 +85,7 @@
           <!-- 表格 -->
           <el-table
             :data="musicListDetail.tracks"
-            size="mini"
+            size="medium"
             style="width: 100%"
             @row-dblclick="clickRow"
             @cell-click="clickCell"
@@ -109,7 +109,7 @@
               :index="handleIndex"
             >
             </el-table-column>
-            <el-table-column label="" width="23">
+            <el-table-column label="" width="24">
               <!-- 下载按钮 -->
               <i class="iconfont icon-download"></i>
             </el-table-column>
@@ -659,7 +659,7 @@ export default {
 }
 
 .titleTag {
-  font-size: 12px;
+  font-size: 14px;
   color: #ec4141;
   border: 1px solid #ec4141;
   padding: 1px 2px;
@@ -669,7 +669,7 @@ export default {
 }
 
 .titleContent {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 600;
   color: #373737;
   overflow: hidden;
@@ -682,7 +682,7 @@ export default {
   display: flex;
   align-items: center;
   margin-top: 8px;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .userAvatar {
@@ -712,7 +712,7 @@ export default {
 }
 
 .buttonItem {
-  font-size: 12px;
+  font-size: 14px;
   padding: 8px 15px;
   border: 1px solid #ddd;
   border-radius: 20px;
@@ -720,7 +720,7 @@ export default {
 }
 
 .buttonItem i {
-  font-size: 12px;
+  font-size: 14px;
   margin-right: 3px;
   transform: scale(0.9);
 }
@@ -733,7 +733,7 @@ export default {
 .tags {
   margin: 8px 0 0 -30px;
   display: flex;
-  font-size: 12px;
+  font-size: 14px;
   transform: scale(0.9);
 }
 
@@ -745,7 +745,7 @@ export default {
 .otherInfo {
   margin: 5px 0 0 -30px;
   display: flex;
-  font-size: 12px;
+  font-size: 14px;
   transform: scale(0.9);
 }
 
@@ -755,7 +755,7 @@ export default {
 
 .desc {
   margin: 5px 0 0 -30px;
-  font-size: 12px;
+  font-size: 14px;
   transform: scale(0.9);
   overflow: hidden;
   text-overflow: ellipsis;

@@ -197,13 +197,14 @@ export default {
 <style scoped>
 .is-active {
   background-color: #f6f6f7;
-  font-size: 16px;
+  font-size: 24px;
   font-weight: 600;
 }
 
 .iconfont {
-  font-size: 14px;
-  margin: 5px !important;
+  font-size: 24px;
+  margin-left:5px !important;
+  margin-right:10px !important;
 }
 
 .routerView {
@@ -215,7 +216,7 @@ export default {
 
 .el-header {
   background-color: #ec4141;
-  height: 60px !important;
+  height: 70px !important;
   padding: 0;
   margin: 0;
   z-index: 100;
@@ -235,10 +236,10 @@ export default {
 }
 
 .el-menu-item {
-  font-size: 12px;
-  padding: 0 0 0 10px !important;
+  font-size: 16px;
+  padding: 5px 0 0 10px !important;
   margin: 5px 0 !important;
-  height: 30px;
+  height: 40px;
   line-height: 30px;
 }
 

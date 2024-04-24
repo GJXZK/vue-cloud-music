@@ -17,7 +17,7 @@
       <div class="search">
         <el-popover
           placement="bottom"
-          width="300"
+          width="450"
           v-model="isSearchPopShow"
           popper-class="searchPop"
           trigger="focus"
@@ -25,14 +25,14 @@
           <el-input
             placeholder="请输入内容"
             prefix-icon="el-icon-search"
-            size="mini"
+            size="medium"
             slot="reference"
             @input="inputSearch"
             @keyup.enter.native="onSubmit"
             v-model="searchInput"
           >
           </el-input>
-          <!-- 搜索历史不想做了，做的话可以将搜索历史存到localstorage中 -->
+          <!-- 搜索历史不想做了，1localstorage中 -->
           <!-- 热搜榜 -->
           <div class="hotSearch" v-if="!searchSuggestList.songs">
             <div class="hotSearchTitle">热搜榜</div>
@@ -389,7 +389,7 @@ export default {
 }
 
 .left {
-  width: 140px;
+  width: 180px;
   margin: 0 50px 0 10px;
 }
 
@@ -410,7 +410,7 @@ export default {
 
 .buttons i {
   background-color: #e13e3e;
-  font-size: 12px;
+  font-size: 16px;
   transform: scale(0.8);
   padding: 5px;
   height: 24px;
@@ -419,12 +419,16 @@ export default {
   margin: 0 3px;
 }
 
+.search{
+  width: 300px;
+}
+
 .right {
   display: flex;
   position: absolute;
   right: 50px;
   top: 0;
-  line-height: 60px;
+  line-height: 70px;
 }
 
 .user {

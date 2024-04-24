@@ -34,12 +34,12 @@
 }
 
 .el-tabs__item {
-  font-size: 16px !important;
+  font-size: 18px !important;
 }
 
 .el-table .cell {
   line-height: 20px !important;
-  font-size: 12px !important;
+  font-size: 16px !important;
   transform: scale(0.88);
   color: rgb(128, 128, 128) !important;
   text-overflow: ellipsis !important;
@@ -48,14 +48,14 @@
 }
 
 .el-table .cell i:nth-child(1) {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
   margin-right: 5px;
 }
 
 .el-table th > .cell {
   font-weight: normal !important;
-  font-size: 12px !important;
+  font-size: 16px !important;
   transform: scale(0.88);
   color: rgb(148, 148, 148) !important;
   margin-bottom: 5px;

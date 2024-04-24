@@ -21,7 +21,8 @@
     background-color: #e13e3e !important;
     border: none;
     color: white !important;
-    border-radius: 15px;
+    border-radius: 20px;
+    padding-left:40px !important;
 }
 
 .el-input__inner::-webkit-input-placeholder {
