@@ -301,7 +301,7 @@ export default {
 
 .form .el-input /deep/input::-webkit-input-placeholder {
   color: #ccc !important;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .form .el-input /deep/ .el-input__icon {
@@ -334,7 +334,7 @@ export default {
 }
 
 .tip {
-  font-size: 12px;
+  font-size: 14px;
   color: #bbb;
   line-height: 10px;
   transform: scale(0.9) translate(-1%, -30%);
@@ -353,7 +353,7 @@ export default {
 .codeButton {
   background-color: #ea4848;
   color: rgb(245, 245, 245);
-  font-size: 12px;
+  font-size: 14px;
   padding: 5px 12px;
   line-height: 15px;
   border-radius: 5px;
@@ -368,7 +368,7 @@ export default {
 .countDown {
   color: rgb(134, 134, 134);
   line-height: 25px;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .countDown span {

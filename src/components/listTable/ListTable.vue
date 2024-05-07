@@ -1,4 +1,3 @@
-
 <template>
   <!-- 这个组件为了复用写的很乱，懒得整理了 -->
   <div>
@@ -143,7 +142,7 @@ table {
 
 .listRows {
   height: 30px;
-  font-size: 12px;
+  font-size: 14px;
   color: rgb(153, 153, 153);
   width: 100%;
   display: flex;
@@ -189,7 +188,7 @@ table {
 
 .checkAll {
   color: rgb(134, 134, 134);
-  font-size: 12px;
+  font-size: 14px;
   transform: scale(0.9) translateX(-5%);
   width: 100px;
   height: 30px;
@@ -198,7 +197,7 @@ table {
 }
 
 .checkAll i {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .selectRow {

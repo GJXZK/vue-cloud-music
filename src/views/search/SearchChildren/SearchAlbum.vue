@@ -71,7 +71,7 @@ export default {
 
 <style scoped>
 .SearchAlbum {
-  max-width: 1000px;
+  max-width: 1500px;
   margin: auto;
 }
 

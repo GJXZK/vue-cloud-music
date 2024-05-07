@@ -780,7 +780,7 @@ export default {
 .loadMore {
   width: 100%;
   height: 50px;
-  font-size: 12px;
+  font-size: 14px;
   color: #aaa;
   text-align: center;
   line-height: 50px;

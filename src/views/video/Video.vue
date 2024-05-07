@@ -25,10 +25,10 @@ export default {
     },
   },
   created() {
-    if (!this.$store.state.isLogin) {
-      this.$message.error("视频页面只有登录后才能访问哦!");
-      this.$router.replace("/index");
-    }
+    // if (!this.$store.state.isLogin) {
+    //   this.$message.error("视频页面只有登录后才能访问哦!");
+    //   this.$router.replace("/index");
+    // }
   },
 };
 </script>

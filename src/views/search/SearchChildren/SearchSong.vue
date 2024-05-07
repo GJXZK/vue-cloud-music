@@ -206,7 +206,7 @@ export default {
 }
 
 .matchTitle {
-  font-size: 12px;
+  font-size: 14px;
   color: rgb(34, 34, 34);
   margin: 5px 0;
 }

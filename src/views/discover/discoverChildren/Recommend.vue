@@ -3,7 +3,7 @@
     <!-- 轮播图 -->
     <div class="recommend">
       <div class="carousel">
-        <el-carousel :interval="4000" type="card" height="180px">
+        <el-carousel :interval="4000" type="card" height="260px">
           <el-carousel-item v-for="(item, index) in bannerData" :key="index">
             <img :src="item.imageUrl" alt="" />
           </el-carousel-item>
@@ -70,7 +70,7 @@ export default {
 }
 
 .recommend {
-  max-width: 1000px;
+  max-width: 1500px;
 }
 
 .carousel {
@@ -79,7 +79,7 @@ export default {
 
 .el-carousel {
   margin: auto;
-  width: 800px;
+  width: 1400px;
 }
 
 .el-carousel__item {

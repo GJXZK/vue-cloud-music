@@ -19,7 +19,7 @@
           :SecondNavBarData="typeList"
           @clickSecondBarItem="typeItem"
           class="secondNavBar"
-          :itemWidth="50"
+          :itemWidth="60"
         ></second-nav-bar>
       </div>
       <div class="selectorItem">
@@ -28,7 +28,7 @@
           :SecondNavBarData="orderList"
           @clickSecondBarItem="orderItem"
           class="secondNavBar"
-          :itemWidth="50"
+          :itemWidth="80"
         ></second-nav-bar>
       </div>
     </div>
@@ -156,13 +156,13 @@ export default {
 }
 
 .title {
-  font-size: 12px;
-  width: 40px;
+  font-size: 14px;
+  width: 45px;
   line-height: 33px;
 }
 
 .secondNavBar {
-  width: calc(100% - 60px);
+  width: calc(100% - 30px);
 }
 
 .musicListNavBar {

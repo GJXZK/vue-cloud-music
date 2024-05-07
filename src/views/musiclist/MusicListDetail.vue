@@ -25,8 +25,12 @@
                 params: { uid: musicListDetail.creator.userId },
               })
             "
-          >{{ musicListDetail.creator.nickname }}</div>
-          <div class="createTime">{{ musicListDetail.createTime | showDate }}创建</div>
+          >
+            {{ musicListDetail.creator.nickname }}
+          </div>
+          <div class="createTime">
+            {{ musicListDetail.createTime | showDate }}创建
+          </div>
         </div>
         <!-- 操作按钮 播放全部-->
         <div class="buttons">
@@ -46,20 +50,30 @@
         <!-- 标签 -->
         <div class="tags">
           标签 :
-          <div class="tagItem" v-for="(item, index) in musicListDetail.tags" :key="index">{{ item }}</div>
+          <div
+            class="tagItem"
+            v-for="(item, index) in musicListDetail.tags"
+            :key="index"
+          >
+            {{ item }}
+          </div>
           <div v-if="musicListDetail.tags.length == 0">暂无标签</div>
         </div>
         <!-- 歌曲列表的歌曲数量和播放量 -->
         <div class="otherInfo">
-          <div class="musicNum">歌曲 : {{ musicListDetail.trackCount | handleNum }}</div>
-          <div class="playCount">播放 : {{ musicListDetail.playCount | handleNum }}</div>
+          <div class="musicNum">
+            歌曲 : {{ musicListDetail.trackCount | handleNum }}
+          </div>
+          <div class="playCount">
+            播放 : {{ musicListDetail.playCount | handleNum }}
+          </div>
         </div>
         <div class="desc">
           简介 :
           {{
-          musicListDetail.description
-          ? musicListDetail.description
-          : "暂无简介"
+            musicListDetail.description
+              ? musicListDetail.description
+              : "暂无简介"
           }}
         </div>
       </div>
@@ -79,31 +93,58 @@
             stripe
             lazy
             :row-key="
-                (row) => {
-                  return row.id;
-                }
-              "
+              (row) => {
+                return row.id;
+              }
+            "
             v-infinite-scroll="this.$store.state.isLogin ? loadMore : ''"
             :infinite-scroll-disabled="scrollLoadDisabled"
             :infinite-scroll-distance="1500"
             :infinite-scroll-immediate="false"
           >
-            <el-table-column label width="40" type="index" :index="handleIndex"></el-table-column>
+            <el-table-column
+              label
+              width="40"
+              type="index"
+              :index="handleIndex"
+            ></el-table-column>
             <el-table-column label width="23">
               <!-- 下载按钮 -->
               <i class="iconfont icon-download"></i>
             </el-table-column>
-            <el-table-column prop="name" label="音乐标题" min-width="350"></el-table-column>
-            <el-table-column prop="ar[0].name" label="歌手" min-width="120"></el-table-column>
-            <el-table-column prop="al.name" label="专辑" min-width="170"></el-table-column>
-            <el-table-column prop="dt" label="时长" min-width="100"></el-table-column>
+            <el-table-column
+              prop="name"
+              label="音乐标题"
+              min-width="350"
+            ></el-table-column>
+            <el-table-column
+              prop="ar[0].name"
+              label="歌手"
+              min-width="120"
+            ></el-table-column>
+            <el-table-column
+              prop="al.name"
+              label="专辑"
+              min-width="170"
+            ></el-table-column>
+            <el-table-column
+              prop="dt"
+              label="时长"
+              min-width="100"
+            ></el-table-column>
           </el-table>
-          <div class="loadMore" v-if="isMore && !this.$store.state.isLogin">登陆后查看更多音乐</div>
+          <div class="loadMore" v-if="isMore && !this.$store.state.isLogin">
+            登陆后查看更多音乐
+          </div>
           <div class="placeholder" v-else></div>
           <!-- <div class="placeholder"></div> -->
         </el-tab-pane>
         <el-tab-pane label="评论" name="second">
-          <div class="commentList" v-if="comments.comments" v-loading="isCommentLoading">
+          <div
+            class="commentList"
+            v-if="comments.comments"
+            v-loading="isCommentLoading"
+          >
             <!-- 精彩评论 -->
             <comment
               :commentType="'musicList'"
@@ -125,15 +166,18 @@
               @getComment="getMusicListComments"
               @scrollToComment="scrollToComment"
               @transToHotComment="
-                  (info) =>
-                    $refs.hotComments.floorComment(info.commentId, info.nickName)
-                "
+                (info) =>
+                  $refs.hotComments.floorComment(info.commentId, info.nickName)
+              "
             >
               <div slot="title">热门评论</div>
             </comment>
           </div>
           <!-- 分页 -->
-          <div class="page" v-show="comments.comments && comments.comments.length != 0">
+          <div
+            class="page"
+            v-show="comments.comments && comments.comments.length != 0"
+          >
             <el-pagination
               background
               layout="prev, pager, next"
@@ -159,19 +203,19 @@ export default {
     return {
       musicListDetail: {
         creator: {},
-        tags: {}
+        tags: {},
       },
       comments: {},
       isCreated: false,
       currentCommentPage: 1,
       // 是否禁止滚动加载
       scrollLoadDisabled: false,
-      isCommentLoading:false,
-      isMore:false,
+      isCommentLoading: false,
+      isMore: false,
     };
   },
   components: {
-    Comment
+    Comment,
   },
 
   methods: {
@@ -207,19 +251,19 @@ export default {
         // 将歌单传到vuex
         this.$store.commit("updataMusicList", {
           musicList: this.musicListDetail.tracks,
-          musicListId: this.musicListDetail.id
+          musicListId: this.musicListDetail.id,
         });
       }
     },
     playAll() {
-      this.clickRow(this.musicListDetail.tracks[0])
+      this.clickRow(this.musicListDetail.tracks[0]);
     },
     collectList() {},
     scrollToComment() {},
-    clickCell(){},
-    commentPageChange(){},
-     // 事件函数
-     handleIndex(index) {
+    clickCell() {},
+    commentPageChange() {},
+    // 事件函数
+    handleIndex(index) {
       // console.log(index);
       index += 1;
       if (index < 10) {
@@ -228,10 +272,7 @@ export default {
         return index;
       }
     },
-    loadMore(){
-      
-    }
-
+    loadMore() {},
   },
   mounted() {
     this.getMusicListDetail();
@@ -245,17 +286,17 @@ export default {
 
       // 2、将date进行格式化
       return formatDate(date, "yyyy-MM-dd");
-    }
+    },
   },
   watch: {
-	// 监听路由是否变化
-	'$route' (to, from) { 
-		if(to.params.id != from.params.id){
-      this.getMusicListDetail();
-      this.getMusicListComments();
-		}
-	}
-},
+    // 监听路由是否变化
+    $route(to, from) {
+      if (to.params.id != from.params.id) {
+        this.getMusicListDetail();
+        this.getMusicListComments();
+      }
+    },
+  },
 };
 </script>
 
@@ -290,7 +331,7 @@ export default {
     .right {
       width: calc(100% - 200px);
       margin-left: 20px;
-      font-size: 12px;
+      font-size: 14px;
       .title {
         display: flex;
         .titleTag {
@@ -370,7 +411,7 @@ export default {
         }
       }
       .desc {
-        font-size: 12px;
+        font-size: 14px;
         // transform: scale(0.9);
         overflow: hidden;
         text-overflow: ellipsis;

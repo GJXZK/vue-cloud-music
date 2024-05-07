@@ -32,7 +32,7 @@ export default {
     itemWidth: {
       type: Number,
       default() {
-        return 40;
+        return 50;
       },
     },
     currentTag: {
@@ -72,7 +72,7 @@ export default {
 .barItem {
   margin: 4px -2px;
   padding: 6px 10px;
-  font-size: 12px;
+  font-size: 14px;
   /* width: 40px; */
   text-align: center;
   box-sizing: content-box;

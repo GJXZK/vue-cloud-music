@@ -123,8 +123,8 @@ export default {
 <style scoped>
 .lyrics {
   width: 100%;
-  height: 275px;
-  font-size: 12px;
+  height: 500px;
+  font-size: 20px;
   text-align: center;
   overflow-y: scroll;
   /* overflow: scroll; */
@@ -135,7 +135,7 @@ export default {
 }
 
 .lyricsItem {
-  font-size: 12px;
+  font-size: 15px;
   /* height: 20px; */
   margin: 25px 20px;
   transition: all 0.5s;

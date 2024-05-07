@@ -20,7 +20,7 @@ export default {
 }
 
 .musicList {
-  max-width: 1000px;
+  max-width: 1500px;
   padding: 10px;
   width: 100%;
 }

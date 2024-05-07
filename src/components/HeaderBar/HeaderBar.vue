@@ -1,7 +1,7 @@
 <template>
   <div class="headerBar">
     <div class="left">
-      <img src="@/assets/img/logo.png" alt="" />
+      <img src="@/assets/img/new_logo.png" alt="" />
     </div>
     <div class="center">
       <div class="buttons">
@@ -389,7 +389,7 @@ export default {
 }
 
 .left {
-  width: 180px;
+  width: 70px;
   margin: 0 50px 0 10px;
 }
 
@@ -419,7 +419,7 @@ export default {
   margin: 0 3px;
 }
 
-.search{
+.search {
   width: 300px;
 }
 
@@ -451,7 +451,7 @@ export default {
 }
 
 .userName {
-  font-size: 12px;
+  font-size: 14px;
   color: rgba(255, 255, 255, 0.85);
   width: 100px;
 }
@@ -495,7 +495,7 @@ export default {
 }
 
 .hotSearchWord {
-  font-size: 12px;
+  font-size: 14px;
   color: rgb(51, 51, 51);
 }
 
@@ -505,12 +505,12 @@ export default {
 }
 
 .hotSearchContent {
-  font-size: 12px;
+  font-size: 14px;
   transform: scale(0.9) translateX(-5%);
 }
 
 .searchSuggest {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .searchSuggestItemTitle {
@@ -528,7 +528,7 @@ export default {
 
 .suggestItemDetail {
   padding: 4px 27px;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .suggestItemDetail:hover {

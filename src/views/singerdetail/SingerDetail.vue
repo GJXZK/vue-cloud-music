@@ -518,7 +518,7 @@ export default {
 }
 
 .titleTag {
-  font-size: 12px;
+  font-size: 14px;
   color: #ec4141;
   border: 1px solid #ec4141;
   padding: 1px 2px;
@@ -543,7 +543,7 @@ export default {
 }
 
 .buttonItem {
-  font-size: 12px;
+  font-size: 14px;
   padding: 8px 15px;
   border: 1px solid #ddd;
   border-radius: 20px;
@@ -551,7 +551,7 @@ export default {
 }
 
 .buttonItem i {
-  font-size: 12px;
+  font-size: 14px;
   margin-right: 3px;
   transform: scale(0.9);
 }
@@ -564,7 +564,7 @@ export default {
 .otherInfo {
   margin: 15px 0 0 -30px;
   display: flex;
-  font-size: 12px;
+  font-size: 14px;
   transform: scale(0.9);
 }
 
@@ -584,7 +584,7 @@ export default {
 }
 
 .singerDesc {
-  font-size: 12px;
+  font-size: 14px;
   color: #373737;
   line-height: 25px;
   letter-spacing: 0.5px;

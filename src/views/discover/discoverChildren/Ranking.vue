@@ -126,7 +126,7 @@ export default {
 }
 
 .ranking {
-  max-width: 1000px;
+  max-width: 1500px;
   padding: 0 10px;
 }
 

@@ -358,6 +358,7 @@ export default {
 .top {
   display: flex;
   justify-content: center;
+  height: 600px;
 }
 
 .left {
@@ -366,7 +367,7 @@ export default {
 }
 
 .discContainer {
-  margin-top: 60px;
+  margin-top: 120px;
   width: 220px;
   position: relative;
 }
@@ -438,7 +439,7 @@ export default {
 .title {
   width: 100%;
   text-align: center;
-  font-size: 12px;
+  font-size: 16px;
   margin: 30px 0 15px;
   color: rgb(145, 145, 145);
 }

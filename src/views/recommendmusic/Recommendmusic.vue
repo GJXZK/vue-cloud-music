@@ -8,7 +8,7 @@
         </div>
         <div class="titleInfo">
           <div class="infoTop">每日歌曲推荐</div>
-          <div class="infoBottom">根据你的音乐口味生成，每天6:00更新</div>
+          <div class="infoBottom">根据你的喜欢的音乐生成</div>
         </div>
       </div>
       <!-- 操作按钮 -->
@@ -260,7 +260,7 @@ export default {
 }
 
 .infoBottom {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .buttons {
@@ -269,7 +269,7 @@ export default {
 }
 
 .buttonItem {
-  font-size: 12px;
+  font-size: 14px;
   padding: 8px 15px;
   border: 1px solid #ddd;
   border-radius: 20px;
@@ -277,7 +277,7 @@ export default {
 }
 
 .buttonItem i {
-  font-size: 12px;
+  font-size: 14px;
   margin-right: 3px;
   transform: scale(0.9);
 }

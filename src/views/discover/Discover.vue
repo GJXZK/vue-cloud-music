@@ -40,7 +40,7 @@ export default {
 }
 
 .discover {
-  /* max-width: 1000px; */
+  /* max-width: 1500px; */
   margin: auto;
   overflow: scroll;
   height: calc(100vh - 157px);

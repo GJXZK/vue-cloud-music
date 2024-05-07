@@ -252,12 +252,12 @@ export default {
 }
 
 .logout i {
-  font-size: 12px;
+  font-size: 14px;
   margin-right: 3px;
 }
 
 .logout span {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .tags {
@@ -266,7 +266,7 @@ export default {
 }
 
 .level {
-  font-size: 12px;
+  font-size: 14px;
   transform: scale(0.8) translateX(-10%);
   background-color: #f0f0f0;
   width: 100;
@@ -303,12 +303,12 @@ export default {
 }
 
 .numItemBottom {
-  font-size: 12px;
+  font-size: 14px;
   transform: scale(0.8);
 }
 
 .otherInfo {
-  font-size: 12px;
+  font-size: 14px;
   transform: scale(0.9) translateX(-5%);
   user-select: text !important;
 }

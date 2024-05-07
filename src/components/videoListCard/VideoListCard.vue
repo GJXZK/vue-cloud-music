@@ -172,7 +172,7 @@ export default {
 }
 
 .playCount {
-  font-size: 12px;
+  font-size: 14px;
   color: white;
   position: absolute;
   top: 0;
@@ -181,7 +181,7 @@ export default {
 }
 
 .videoTime {
-  font-size: 12px;
+  font-size: 14px;
   color: white;
   position: absolute;
   bottom: 5px;
@@ -191,7 +191,7 @@ export default {
 
 .videoTitle {
   margin-top: 8px;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 16px;
   color: rgb(32, 32, 32);
   word-break: break-all;
@@ -206,7 +206,7 @@ export default {
 }
 
 .singer {
-  font-size: 12px;
+  font-size: 14px;
   transform: scale(0.9) translateX(-5%);
   margin: 1px 0 0 -1px;
   padding: 0;

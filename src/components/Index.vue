@@ -215,7 +215,7 @@ export default {
 }
 
 .el-header {
-  background-color: #ec4141;
+  background-color: #c71218;
   height: 70px !important;
   padding: 0;
   margin: 0;

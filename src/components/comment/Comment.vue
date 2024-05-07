@@ -445,7 +445,7 @@ export default {
 }
 
 .commentHeader {
-  font-size: 14px;
+  font-size: 18px;
   color: rgb(26, 26, 26);
   font-weight: 600;
   padding: 10px 0;
@@ -455,7 +455,7 @@ export default {
   margin: 5px 0;
   padding: 10px 0 20px;
   border-bottom: 1px solid #eee;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .commentCreatorAvatar {
@@ -529,7 +529,7 @@ export default {
 
 .el-textarea /deep/ .el-textarea__inner {
   height: 65px !important;
-  font-size: 12px;
+  font-size: 14px;
   resize: none;
 }
 
@@ -584,6 +584,7 @@ export default {
 .musicTitle {
   width: 100%;
   font-weight: bold;
+  font-size: 20px;
   color: #333333;
   text-align: center;
   margin-bottom: 10px;

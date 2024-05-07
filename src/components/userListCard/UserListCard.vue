@@ -132,7 +132,7 @@ export default {
 
 .signature {
   font-weight: lighter;
-  font-size: 12px;
+  font-size: 14px;
   transform: scale(0.9) translateX(-5%);
   flex: 1;
   overflow: hidden;
@@ -145,7 +145,7 @@ export default {
 
 .nums {
   display: flex;
-  font-size: 12px;
+  font-size: 14px;
   transform: scale(0.9) translateX(-5%);
   color: #888;
 }

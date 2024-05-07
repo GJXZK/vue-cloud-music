@@ -144,7 +144,7 @@ export default {
   padding: 10px 25px;
   display: flex;
   justify-content: space-between;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .page {

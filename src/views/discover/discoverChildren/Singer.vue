@@ -178,7 +178,7 @@ export default {
 }
 
 .singer {
-  max-width: 1000px;
+  max-width: 1500px;
   padding: 0 10px;
 }
 
@@ -187,8 +187,8 @@ export default {
 }
 
 .title {
-  font-size: 12px;
-  width: 40px;
+  font-size: 14px;
+  width: 50px;
   line-height: 33px;
 }
 

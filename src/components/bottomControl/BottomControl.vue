@@ -533,7 +533,7 @@ export default {
 
 .musicInfo {
   color: rgb(37, 37, 37);
-  font-size: 12px;
+  font-size: 14px;
   width: 70px;
 }
 
@@ -626,7 +626,7 @@ export default {
 }
 
 .drawerHeader {
-  font-size: 12px;
+  font-size: 14px;
   transform: scale(0.9);
   color: #aaa;
   padding: 15px 0;
@@ -639,7 +639,7 @@ export default {
 
 .currentTime,
 .totalTime {
-  font-size: 12px;
+  font-size: 14px;
   transform: scale(0.85);
   color: #aaa;
   margin: 0 5px;
@@ -669,7 +669,7 @@ export default {
 
 .recondInfo {
   position: absolute;
-  font-size: 12px;
+  font-size: 14px;
   transform: scale(0.8);
   width: 140px;
   right: -5px;

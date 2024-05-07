@@ -186,8 +186,8 @@ export default {
   color: #d59e54;
   border: 1px solid #d59e54;
   padding: 5px 10px;
-  width: 88px;
-  font-size: 12px;
+  width: 100px;
+  font-size: 14px;
   margin: 20px 10px 15px;
   border-radius: 15px;
 }
@@ -205,7 +205,7 @@ export default {
 .desc {
   color: rgba(255, 255, 255, 0.5);
   /* 字体直接写小于12没有效果 */
-  font-size: 12px;
+  font-size: 14px;
   transform: scale(0.9, 0.9);
 }
 
@@ -213,7 +213,7 @@ export default {
   padding: 10px 0;
   display: flex;
   justify-content: space-between;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .page {

@@ -79,13 +79,13 @@ export default {
 }
 
 .SortBox i {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .tips {
   width: 100%;
   text-align: center;
-  font-size: 12px;
+  font-size: 14px;
   padding: 20px 0;
   color: rgb(145, 145, 145);
 }
@@ -96,7 +96,7 @@ export default {
 }
 
 .sortItme {
-  font-size: 12px;
+  font-size: 14px;
   width: 25%;
   text-align: center;
   color: rgb(85, 85, 85);

@@ -8,8 +8,8 @@
         class="videoPlayer"
         :src="videoUrl"
         controls
-        width="496px"
-        height="284px"
+        width="800px"
+        height="400px"
         @play="playVideo"
         :poster="
           $route.params.type == 'mv' ? videoInfo.cover : videoInfo.coverUrl
@@ -463,7 +463,7 @@ export default {
 }
 
 .left {
-  width: 500px;
+  max-width: 1000px;
 }
 
 .right {
@@ -497,7 +497,7 @@ export default {
   position: absolute;
   top: 0;
   right: 5px;
-  font-size: 12px;
+  font-size: 14px;
   color: white;
   transform: scale(0.9);
 }
@@ -506,13 +506,13 @@ export default {
   position: absolute;
   bottom: 5px;
   right: 5px;
-  font-size: 12px;
+  font-size: 14px;
   color: white;
   transform: scale(0.9);
 }
 
 .relatedVideoItemInfo {
-  font-size: 12px;
+  font-size: 14px;
   color: rgb(31, 30, 30);
   margin: 12px 0;
   width: 140px;
@@ -553,7 +553,7 @@ export default {
 }
 
 .userName {
-  font-size: 12px;
+  font-size: 14px;
   margin-left: 10px;
   color: rgb(36, 36, 36);
   cursor: pointer;
@@ -569,7 +569,7 @@ export default {
 .otherInfo {
   display: flex;
   color: #aaa;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .otherInfo div {
@@ -579,7 +579,7 @@ export default {
 
 .buttons {
   display: flex;
-  font-size: 12px;
+  font-size: 14px;
   margin: 20px 0;
   color: #252525;
 }
@@ -592,7 +592,7 @@ export default {
 }
 
 .buttonItem i {
-  font-size: 12px;
+  font-size: 14px;
   margin-right: 3px;
 }
 
