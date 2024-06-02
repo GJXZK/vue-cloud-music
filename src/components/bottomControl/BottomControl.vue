@@ -1,3 +1,4 @@
+<!-- Vue 3 组件示例，监听用户音乐播放、点赞、收藏行为 -->
 <template>
   <div class="bottomControl">
     <audio

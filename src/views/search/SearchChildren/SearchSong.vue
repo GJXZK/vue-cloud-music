@@ -23,7 +23,7 @@
     <!-- 这里的播放效果样式不能直接简单的操作DOM，因为有分页，也可以做成无限滚动，或者根据索引渲染，但是我懒得搞了 -->
     <el-table
       :data="searchSongList"
-      size="mini"
+      size="medium"
       style="width: 100%"
       @row-dblclick="clickRow"
       @cell-click="clickCell"

@@ -59,7 +59,7 @@
               解决办法：避免使用refs..（拼接也不好使） -->
           <el-table
             :data="albumInfo.songs"
-            size="mini"
+            size="medium"
             style="width: 100%"
             @row-dblclick="clickRow"
             @cell-click="clickCell"

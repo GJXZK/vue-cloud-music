@@ -7,7 +7,7 @@
           <img src="@/assets/img/recommendMusic.png" alt="" />
         </div>
         <div class="titleInfo">
-          <div class="infoTop">每日歌曲推荐</div>
+          <div class="infoTop">歌曲推荐</div>
           <div class="infoBottom">根据你的喜欢的音乐生成</div>
         </div>
       </div>
@@ -28,8 +28,8 @@
       <!-- 表格 -->
       <el-table
         :data="recommendMusic"
-        size="mini"
-        style="width: 100%"
+        size="medium"
+        style="width: 80%"
         @row-dblclick="clickRow"
         @cell-click="clickCell"
         highlight-current-row
